@@ -1,5 +1,5 @@
-![Build Status](https://github.com/sanyarnd/java-course-2023/actions/workflows/build.yml/badge.svg)
+![Build Status](https://github.com/podlizzie/java-course-2023-tink/actions/workflows/build.yml)
 
 Домашние задания курса https://fintech.tinkoff.ru/academy/java
 
-Студент: `ФИО`
+Студент: `Бакулина Елизавета Константиновна`
