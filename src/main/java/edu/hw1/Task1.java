@@ -1,11 +1,16 @@
 package edu.hw1;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Task1 {
+
+    private static final int SECONDS_IN_MUNUTE = 60;
+    private final static Logger LOGGER = LogManager.getLogger();
 
     private Task1() {
     }
 
-    @SuppressWarnings("MagicNumber")
     public static long minutesToSeconds(String time) {
         if (time == null || time.isEmpty()) {
             return -1;
@@ -17,10 +22,11 @@ public class Task1 {
         try {
             long minutes = Long.parseLong(parts[0]);
             long seconds = Long.parseLong(parts[1]);
-            if (seconds < 60 && seconds >= 0 && minutes >= 0) {
-                return minutes * 60 + seconds;
+            if (seconds < SECONDS_IN_MUNUTE && seconds >= 0 && minutes >= 0) {
+                return minutes * SECONDS_IN_MUNUTE + seconds;
             }
         } catch (NumberFormatException e) {
+            LOGGER.info(e);
         }
         return -1;
     }

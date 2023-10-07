@@ -1,11 +1,11 @@
 package edu.hw1;
 
 public class Task2 {
+    private static final int TEN = 10;
 
     private Task2() {
     }
 
-    @SuppressWarnings("MagicNumber")
     public static int countDigits(Number number) {
         Number num = number;
         if (num.equals(0)) {
@@ -23,7 +23,7 @@ public class Task2 {
         }
 
         while (firstPart != 0) {
-            firstPart /= 10;
+            firstPart /= TEN;
             count++;
         }
 
