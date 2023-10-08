@@ -3,7 +3,7 @@ package edu.hw1;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Task1 {
+public final class Task1 {
 
     private static final int SECONDS_IN_MUNUTE = 60;
     private final static Logger LOGGER = LogManager.getLogger();
