@@ -21,12 +21,12 @@ public final class Task5 {
     private static boolean isPalindrome(int num) {
         int reverseNum = 0;
         int initialNum = num;
-        while (num != 0) {
-            int remainder = num % TEN;
+        while (initialNum != 0) {
+            int remainder = initialNum % TEN;
             reverseNum = (reverseNum * TEN) + remainder;
-            num /= TEN;
+            initialNum /= TEN;
         }
-        return initialNum == reverseNum;
+        return num == reverseNum;
     }
 
     private static int makeDescendant(Integer num) {
