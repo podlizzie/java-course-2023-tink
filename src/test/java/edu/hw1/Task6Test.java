@@ -52,4 +52,10 @@ public class Task6Test {
     public void testCountK6174() {
         assertThat(Task6.countK(6174)).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("Test with adding zero to the top")
+    public void testCountK1222() {
+        assertThat(Task6.countK(1222)).isEqualTo(5);
+    }
 }

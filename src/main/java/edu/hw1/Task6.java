@@ -10,23 +10,25 @@ public class Task6 {
     }
 
     public static int countK(int number) {
-        int count = 0;
         if (!checkNum(number)) {
             return -1;
         }
-        StringBuilder diff = new StringBuilder(String.valueOf(number));
+        return calculateCountK(String.valueOf(number));
+    }
+
+    private static int calculateCountK(String num) {
+        if (num.equals("6174")) {
+            return 0;
+        }
+
+        int greaterNum = Integer.parseInt(descendingNum(num));
+        int lowerNum = Integer.parseInt(increaseNum(num));
+
+        StringBuilder diff = new StringBuilder(String.valueOf(greaterNum - lowerNum));
         while (diff.length() < NUMBER_LENGHT) {
             diff.insert(0, "0");
         }
-        while (!diff.toString().equals("6174")) {
-            int greaterNum = Integer.parseInt(descendingNum(diff.toString()));
-            int lowerNum = Integer.parseInt(increaseNum(diff.toString()));
-            diff = new StringBuilder(String.valueOf(greaterNum - lowerNum));
-            countK(Integer.parseInt(diff.toString()));
-            count++;
-        }
-
-        return count;
+        return 1 + calculateCountK(String.valueOf(diff));
     }
 
     private static boolean checkNum(int number) {

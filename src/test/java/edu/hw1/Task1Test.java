@@ -22,7 +22,7 @@ public class Task1Test {
     @Test
     @DisplayName("Test with 1 part")
     void testWith1Part() {
-        assertEquals(-1, Task1.minutesToSeconds(":55"));
+        assertEquals(-1, Task1.minutesToSeconds("5:"));
     }
 
     @Test
