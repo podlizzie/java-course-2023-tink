@@ -55,4 +55,25 @@ public class Task7Test {
         assertThat(result).isEqualTo(10);
     }
 
+    @Test
+    @DisplayName("Test rotateRight with (1111) number")
+    void testRotateRightWithConstantNumberAfterShift() {
+        int result = Task7.rotateRight(15, 10);
+        assertThat(result).isEqualTo(15);
+    }
+
+    @Test
+    @DisplayName("Test rotateRight with negative shift")
+    void testRotateRightWithNegativelyShift() {
+        int result = Task7.rotateRight(10, -3);
+        assertThat(result).isEqualTo(-1);
+    }
+
+    @Test
+    @DisplayName("Test rotateLeft with negative shift")
+    void testRotateLeftWithNegativelyShift() {
+        int result = Task7.rotateLeft(10, -3);
+        assertThat(result).isEqualTo(-1);
+    }
+
 }

@@ -6,6 +6,9 @@ public class Task7 {
     }
 
     public static int rotateRight(int num, int shift) {
+        if (shift < 0) {
+            return -1;
+        }
         String binaryNum = Integer.toBinaryString(num);
         int reallyShift = shift % binaryNum.length();
         String shiftPart = binaryNum.substring(binaryNum.length() - reallyShift);
@@ -14,6 +17,9 @@ public class Task7 {
     }
 
     public static int rotateLeft(int num, int shift) {
+        if (shift < 0) {
+            return -1;
+        }
         String binaryNum = Integer.toBinaryString(num);
         int reallyShift = shift % binaryNum.length();
         String shiftPart = binaryNum.substring(reallyShift);
