@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class Task6 {
     private static final int NUMBER_LENGHT = 4;
+    private static final String KAPREKAR_NUM = "6174";
 
     private Task6() {
 
@@ -17,7 +18,7 @@ public class Task6 {
     }
 
     private static int calculateCountK(String num) {
-        if (num.equals("6174")) {
+        if (num.equals(KAPREKAR_NUM)) {
             return 0;
         }
 
