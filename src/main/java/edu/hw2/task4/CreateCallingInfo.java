@@ -1,4 +1,4 @@
-package edu.hw2.Task4;
+package edu.hw2.task4;
 
 import java.util.ArrayList;
 import java.util.List;

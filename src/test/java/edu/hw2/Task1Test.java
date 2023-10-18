@@ -1,10 +1,10 @@
 package edu.hw2;
 
-import edu.hw2.Task1.Addition;
-import edu.hw2.Task1.Constant;
-import edu.hw2.Task1.Exponent;
-import edu.hw2.Task1.Multiplication;
-import edu.hw2.Task1.Negate;
+import edu.hw2.task1.Addition;
+import edu.hw2.task1.Constant;
+import edu.hw2.task1.Exponent;
+import edu.hw2.task1.Multiplication;
+import edu.hw2.task1.Negate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

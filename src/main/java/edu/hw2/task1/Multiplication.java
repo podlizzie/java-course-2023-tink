@@ -1,4 +1,4 @@
-package edu.hw2.Task1;
+package edu.hw2.task1;
 
 public record Multiplication(Expr num1, Expr num2) implements Expr {
     @Override

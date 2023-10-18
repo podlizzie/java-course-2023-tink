@@ -1,9 +1,9 @@
 package edu.hw2;
 
-import edu.hw2.Task4.CallingInfo;
+import edu.hw2.task4.CallingInfo;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import static edu.hw2.Task4.CreateCallingInfo.createCallingInfo;
+import static edu.hw2.task4.CreateCallingInfo.createCallingInfo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Task4Test {
