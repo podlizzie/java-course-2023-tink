@@ -14,9 +14,7 @@ public class CreateCallingInfo {
 
         for (int i = 2; i < stackTrace.length; i++) {
             StackTraceElement caller = stackTrace[i];
-            String className = caller.getClassName();
-            String methodName = caller.getMethodName();
-            callingInfoList.add(new CallingInfo(className, methodName));
+            callingInfoList.add(new CallingInfo(caller.getClassName(), caller.getMethodName()));
         }
 
         return callingInfoList;
