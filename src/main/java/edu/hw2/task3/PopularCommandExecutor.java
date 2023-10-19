@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 
 public final class PopularCommandExecutor {
     private final static Logger LOGGER = LogManager.getLogger();
-    private String lastException = "";
     private final ConnectionManager manager;
     private final int maxAttempts;
 
@@ -28,7 +27,7 @@ public final class PopularCommandExecutor {
                 connection.execute(command);
                 return;
             } catch (ConnectionException e) {
-                lastException = "Attempt " + (attempts + 1) + " failed with ConnectionException. Retrying...";
+                String lastException = "Attempt " + (attempts + 1) + " failed with ConnectionException. Retrying...";
                 LOGGER.info(lastException);
             } catch (Exception e) {
                 throw new RuntimeException("Failed to execute command", e);
