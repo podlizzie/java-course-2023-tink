@@ -9,11 +9,10 @@ public class CreateCallingInfo {
     }
 
     public static List<CallingInfo> createCallingInfo() {
-        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        StackTraceElement[] stackTrace = new Throwable().getStackTrace();
         List<CallingInfo> callingInfoList = new ArrayList<>();
 
-        for (int i = 2; i < stackTrace.length; i++) {
-            StackTraceElement caller = stackTrace[i];
+        for (StackTraceElement caller : stackTrace) {
             callingInfoList.add(new CallingInfo(caller.getClassName(), caller.getMethodName()));
         }
 
