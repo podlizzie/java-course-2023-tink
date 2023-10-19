@@ -12,18 +12,15 @@ public class Rectangle extends Shape {
         this.height = height;
     }
 
-    @Override
-    double getWidth() {
+    @Override public double getWidth() {
         return width;
     }
 
-    @Override
-    double getHeight() {
+    @Override public double getHeight() {
         return height;
     }
 
-    @Override
-    double area() {
+    @Override public double area() {
         return height * width;
     }
 

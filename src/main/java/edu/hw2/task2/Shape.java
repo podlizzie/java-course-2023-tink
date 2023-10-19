@@ -1,9 +1,9 @@
 package edu.hw2.task2;
 
 abstract class Shape {
-    abstract double getWidth();
+    public abstract double getWidth();
 
-    abstract double getHeight();
+    public abstract double getHeight();
 
-    abstract double area();
+    public abstract double area();
 }
