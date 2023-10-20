@@ -17,6 +17,17 @@ public class Task1Test {
     }
 
     @Test
+    @DisplayName("Test with russian lower case input")
+    public void TestWithRussianLowerCaseInput() {
+        String input = "Привет";
+        String expectedOutput = "Привет";
+
+        String result = Task1.atbashCode(input);
+
+        assertThat(result).isEqualTo(expectedOutput);
+    }
+
+    @Test
     @DisplayName("Test with upper case input")
     public void TestWithUpperCaseInput() {
         String input = "HELLO WORLD";

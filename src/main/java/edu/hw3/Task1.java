@@ -12,8 +12,10 @@ public class Task1 {
                 char newChar;
                 if (letter >= 'a' && letter <= 'z') {
                     newChar = (char) ('z' - (letter - 'a'));
-                } else {
+                } else if (letter >= 'A' && letter <= 'Z') {
                     newChar = (char) ('Z' - (letter - 'A'));
+                } else {
+                    newChar = letter;
                 }
                 output.append(newChar);
             } else {
