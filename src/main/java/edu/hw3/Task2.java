@@ -9,12 +9,22 @@ public class Task2 {
     }
 
     public static List<String> clusterize(String input) {
+
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("Input cannot be null or empty");
+        }
+
+        if (!input.matches("[()a-zA-Z]+")) {
+            throw new IllegalArgumentException("Input contains invalid characters");
+        }
+
         List<String> output = new ArrayList<>();
         int count = 0;
         int start = 0;
 
         for (int i = 0; i < input.length(); i++) {
             char symbol = input.charAt(i);
+
             if (symbol == '(') {
                 count++;
             } else if (symbol == ')') {

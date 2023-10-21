@@ -40,4 +40,20 @@ public class Task2Test {
         List<String> result = Task2.clusterize("(((()))");
         assertThat(result).isEmpty();
     }
+
+    @Test
+    @DisplayName("Test with invalid characters")
+    public void testWithInvalidCharacters() {
+        try {
+            Task2.clusterize("(abc())");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage()).isEqualTo("Input contains invalid characters");
+        }
+
+        try {
+            Task2.clusterize("");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage()).isEqualTo("Input cannot be null or empty");
+        }
+    }
 }
