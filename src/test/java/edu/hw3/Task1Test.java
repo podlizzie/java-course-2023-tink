@@ -6,8 +6,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task1Test {
     @Test
-    @DisplayName("Test with lower case input")
-    public void TestWithLowerCaseInput() {
+    @DisplayName("Test that atbashCode returns correct result with lowercase input")
+    public void testThatAtbashCodeReturnsCorrectResultWithLowerCaseInput() {
         String input = "hello world";
         String expectedOutput = "svool dliow";
 
@@ -17,8 +17,8 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Test with russian lower case input")
-    public void TestWithRussianLowerCaseInput() {
+    @DisplayName("Test that atbashCode returns correct result with russian lowercase input")
+    public void testThatAtbashCodeReturnsCorrectResultWithRussianLowerCaseInput() {
         String input = "Привет";
         String expectedOutput = "Привет";
 
@@ -28,8 +28,8 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Test with upper case input")
-    public void TestWithUpperCaseInput() {
+    @DisplayName("Test that atbashCode returns correct result with uppercase input")
+    public void testThatAtbashCodeReturnsCorrectResultWithUpperCaseInput() {
         String input = "HELLO WORLD";
         String expectedOutput = "SVOOL DLIOW";
 
@@ -39,8 +39,8 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Test with mixed letters input")
-    public void TestWithMixedLettersInput() {
+    @DisplayName("Test that atbashCode returns correct result with mixed letters input")
+    public void testThatAtbashCodeReturnsCorrectResultWithMixedLettersInput() {
         String input = "Hello World";
         String expectedOutput = "Svool Dliow";
 
@@ -50,8 +50,8 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Test without letters")
-    public void TestWithoutLetters() {
+    @DisplayName("Test that atbashCode returns the input string without letters")
+    public void testThatAtbashCodeReturnsInputWithoutLetters() {
         String input = "12345&*^$#";
         String expectedOutput = "12345&*^$#";
 
@@ -61,8 +61,8 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Test with mixed string")
-    public void TestWithMixedString() {
+    @DisplayName("Test that atbashCode returns correct result with mixed string")
+    public void testThatAtbashCodeReturnsCorrectResultWithMixedString() {
         String input = "Let me guess, you’re checking hw3!";
         String expectedOutput = "Ovg nv tfvhh, blf’iv xsvxprmt sd3!";
 
@@ -72,10 +72,12 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Test with mixed big string")
-    public void TestWithMixedBigString() {
-        String input = "Any fool can write code that a computer can understand. Good programmers write code that humans can understand. ― Martin Fowler";
-        String expectedOutput = "Zmb ullo xzm dirgv xlwv gszg z xlnkfgvi xzm fmwvihgzmw. Tllw kiltiznnvih dirgv xlwv gszg sfnzmh xzm fmwvihgzmw. ― Nzigrm Uldovi";
+    @DisplayName("Test that atbashCode returns correct result with mixed big string")
+    public void testThatAtbashCodeReturnsCorrectResultWithMixedBigString() {
+        String input =
+            "Any fool can write code that a computer can understand. Good programmers write code that humans can understand. ― Martin Fowler";
+        String expectedOutput =
+            "Zmb ullo xzm dirgv xlwv gszg z xlnkfgvi xzm fmwvihgzmw. Tllw kiltiznnvih dirgv xlwv gszg sfnzmh xzm fmwvihgzmw. ― Nzigrm Uldovi";
 
         String result = Task1.atbashCode(input);
 

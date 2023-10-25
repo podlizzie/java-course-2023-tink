@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 public class Task3Test {
     @Test
-    @DisplayName("Test with list of strings #1")
-    public void testWithStringList1() {
+    @DisplayName("Test that freqDict returns correct result for string list 1")
+    public void testThatFreqDictReturnedCorrectResultForStringList1() {
         List<String> input = List.of("a", "bb", "a", "bb");
         Map<String, Integer> expected = Map.of("bb", 2, "a", 2);
 
@@ -18,8 +18,8 @@ public class Task3Test {
     }
 
     @Test
-    @DisplayName("Test with list of strings #2")
-    public void testWithStringListW2() {
+    @DisplayName("Test that freqDict returns correct result for string list 2")
+    public void testThatFreqDictReturnedCorrectResultForStringList2() {
         List<String> input = List.of("this", "and", "that", "and");
         Map<String, Integer> expected = Map.of("that", 1, "and", 2, "this", 1);
 
@@ -28,8 +28,8 @@ public class Task3Test {
     }
 
     @Test
-    @DisplayName("Test with list of strings with non-English string")
-    public void testWithStringListNonEnglish() {
+    @DisplayName("Test that freqDict returns correct result for string list with non-English string")
+    public void testThatFreqDictReturnedCorrectResultForStringListNonEnglish() {
         List<String> input = List.of("код", "код", "код", "bug");
         Map<String, Integer> expected = Map.of("код", 3, "bug", 1);
 
@@ -38,8 +38,8 @@ public class Task3Test {
     }
 
     @Test
-    @DisplayName("Test with list of integers")
-    public void testWithIntegerList() {
+    @DisplayName("Test that freqDict returns correct result for integer list")
+    public void testThatFreqDictReturnedCorrectResultForIntegerList() {
         List<Integer> input = List.of(1, 1, 2, 2);
         Map<Integer, Integer> expected = Map.of(1, 2, 2, 2);
 

@@ -7,43 +7,43 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class Task2Test {
     @Test
-    @DisplayName("Simple test 1")
-    public void testClusterize1() {
+    @DisplayName("Test that clusterize returns correct result for simple input 1")
+    public void testThatClusterizeReturnedCorrectResultForSimpleInput1() {
         List<String> result = Task2.clusterize("()()()");
         assertThat(result).containsExactly("()", "()", "()");
     }
 
     @Test
-    @DisplayName("Simple test 2")
-    public void testClusterize2() {
+    @DisplayName("Test that clusterize returns correct result for simple input 2")
+    public void testThatClusterizeReturnedCorrectResultForSimpleInput2() {
         List<String> result = Task2.clusterize("((()))");
         assertThat(result).containsExactly("((()))");
     }
 
     @Test
-    @DisplayName("Simple test 3")
-    public void testClusterize3() {
+    @DisplayName("Test that clusterize returns correct result for simple input 3")
+    public void testThatClusterizeReturnedCorrectResultForSimpleInput3() {
         List<String> result = Task2.clusterize("((()))(())()()(()())");
         assertThat(result).containsExactly("((()))", "(())", "()", "()", "(()())");
     }
 
     @Test
-    @DisplayName("Simple test 4")
-    public void testClusterize4() {
+    @DisplayName("Test that clusterize returns correct result for simple input 4")
+    public void testThatClusterizeReturnedCorrectResultForSimpleInput4() {
         List<String> result = Task2.clusterize("((())())(()(()()))");
         assertThat(result).containsExactly("((())())", "(()(()()))");
     }
 
     @Test
-    @DisplayName("Test with different number of closing and opening brackets")
-    public void testWithDiffNumber() {
+    @DisplayName("Test that clusterize returns empty list for input with different number of closing and opening brackets")
+    public void testThatClusterizeReturnsEmptyListForInputWithDiffNumber() {
         List<String> result = Task2.clusterize("(((()))");
         assertThat(result).isEmpty();
     }
 
     @Test
-    @DisplayName("Test with invalid characters")
-    public void testWithInvalidCharacters() {
+    @DisplayName("Test that clusterize throws IllegalArgumentException for input with invalid characters")
+    public void testThatClusterizeThrowsIllegalArgumentExceptionForInvalidCharacters() {
         try {
             Task2.clusterize("(abc())");
         } catch (IllegalArgumentException e) {

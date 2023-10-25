@@ -25,8 +25,8 @@ public class Task4Test {
         "1000, M",
         "3999, MMMCMXCIX"
     })
-    @DisplayName("Test which should convert arab to roman num correctly")
-    public void TestConvertToRoman(int arabicNumber, String romanNumber) {
+    @DisplayName("Test that convertToRoman returns correct result for valid input")
+    public void testThatConvertToRomanReturnedCorrectResultForValidInput(int arabicNumber, String romanNumber) {
         String romanNum = Task4.convertToRoman(arabicNumber);
         Assertions.assertThat(romanNum).isEqualTo(romanNumber);
     }
@@ -36,8 +36,8 @@ public class Task4Test {
         "-1, Input number should be in range [1; 3999]",
         "4000, Input number should be in range [1; 3999]"
     })
-    @DisplayName("Test which should throw IllegalArgumentException for invalid input")
-    public void TestConvertToRomanInvalidInputTest(int input, String errorMessage) {
+    @DisplayName("Test that convertToRoman throws IllegalArgumentException for invalid input")
+    public void testThatConvertToRomanThrowsIllegalArgumentExceptionForInvalidInput(int input, String errorMessage) {
         try {
             Task4.convertToRoman(input);
         } catch (IllegalArgumentException e) {
