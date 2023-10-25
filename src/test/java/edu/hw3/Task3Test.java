@@ -5,6 +5,7 @@ import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task3Test {
     @Test
@@ -14,7 +15,7 @@ public class Task3Test {
         Map<String, Integer> expected = Map.of("bb", 2, "a", 2);
 
         Map<String, Integer> result = Task3.freqDict(input);
-        Assertions.assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -24,7 +25,7 @@ public class Task3Test {
         Map<String, Integer> expected = Map.of("that", 1, "and", 2, "this", 1);
 
         Map<String, Integer> result = Task3.freqDict(input);
-        Assertions.assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -34,7 +35,7 @@ public class Task3Test {
         Map<String, Integer> expected = Map.of("код", 3, "bug", 1);
 
         Map<String, Integer> result = Task3.freqDict(input);
-        Assertions.assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -44,6 +45,6 @@ public class Task3Test {
         Map<Integer, Integer> expected = Map.of(1, 2, 2, 2);
 
         Map<Integer, Integer> result = Task3.freqDict(input);
-        Assertions.assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 }
