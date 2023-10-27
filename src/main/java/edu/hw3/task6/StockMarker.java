@@ -13,7 +13,6 @@ public class StockMarker implements StockMarket {
     @Override
     public void remove(Stock stock) {
         stocks.remove(stock);
-
     }
 
     @Override
