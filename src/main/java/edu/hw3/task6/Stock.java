@@ -6,7 +6,7 @@ public class Stock implements Comparable<Stock> {
     private final String name;
     private final int cost;
 
-    Stock(String name, int cost) {
+    public Stock(String name, int cost) {
         this.cost = cost;
         this.name = name;
     }
