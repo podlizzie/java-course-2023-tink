@@ -12,12 +12,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class TestAnimalAction {
     private static @NotNull List<Animal> createAnimals() {
         return Arrays.asList(
-            new Animal("mr big boy", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true),
             new Animal("Samba", Animal.Type.CAT, Animal.Sex.F, 3, 20, 4, false),
+            new Animal("mr big boy", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true),
             new Animal("Mars", Animal.Type.DOG, Animal.Sex.M, 5, 30, 8, true),
+            new Animal("Nemo", Animal.Type.FISH, Animal.Sex.M, 1, 5, 6, false),
             new Animal("Tasya", Animal.Type.DOG, Animal.Sex.F, 4, 28, 7, true),
             new Animal("Fifi", Animal.Type.BIRD, Animal.Sex.F, 2, 10, 1, false),
-            new Animal("Nemo", Animal.Type.FISH, Animal.Sex.M, 1, 5, 6, false),
             new Animal("Semion", Animal.Type.SPIDER, Animal.Sex.M, 2, 2, 0, true)
         );
     }
@@ -217,8 +217,21 @@ public class TestAnimalAction {
     }
 
     @Test
-    void testThatSortAnimalsByTypeSexNameReturnedCorrectResult16() {
+    public void testThatAnimalsAreSortedByTypeSexAndNameReturnedCorrectSort16() {
+        List<Animal> animals = createAnimals();
+        List<Animal> sortedAnimals = AnimalAction.sortAnimalsByTypeSexAndName(animals);
 
+        List<Animal> expectedSortedAnimals = Arrays.asList(
+            new Animal("mr big boy", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true),
+            new Animal("Samba", Animal.Type.CAT, Animal.Sex.F, 3, 20, 4, false),
+            new Animal("Mars", Animal.Type.DOG, Animal.Sex.M, 5, 30, 8, true),
+            new Animal("Tasya", Animal.Type.DOG, Animal.Sex.F, 4, 28, 7, true),
+            new Animal("Fifi", Animal.Type.BIRD, Animal.Sex.F, 2, 10, 1, false),
+            new Animal("Nemo", Animal.Type.FISH, Animal.Sex.M, 1, 5, 6, false),
+            new Animal("Semion", Animal.Type.SPIDER, Animal.Sex.M, 2, 2, 0, true)
+        );
+
+        assertThat(sortedAnimals).isEqualTo(expectedSortedAnimals);
     }
 
     @Test
