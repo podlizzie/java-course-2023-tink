@@ -74,9 +74,15 @@ public class AnimalAction {
      * @param animals the list of animals
      * @return the predominant sex (Animal.Sex)
      */
-//    public static Animal.Sex predominantSex(@NotNull List<Animal> animals){
-//        return animals.stream().collect(Collectors.groupingBy(Animal::sex, Collectors.counting()))
-//    }
+    public static Animal.Sex predominantSex(List<Animal> animals) {
+        return animals.stream()
+            .collect(Collectors.groupingBy(Animal::sex, Collectors.counting()))
+            .entrySet()
+            .stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+            .orElse(null);
+    }
 
     /**
      * Task 6: Finds the heaviest animal of each type.

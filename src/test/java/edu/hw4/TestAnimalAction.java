@@ -83,6 +83,15 @@ public class TestAnimalAction {
     }
 
     @Test
+    public void testThatPredominantSexReturnedCorrectlySex5() {
+        List<Animal> animals = createAnimals();
+
+        Animal.Sex predominantSex = AnimalAction.predominantSex(animals);
+
+        assertThat(predominantSex).isEqualTo(Animal.Sex.M);
+    }
+
+    @Test
     void testThatHeaviestAnimalSpeciesReturnedMapOfTypeAndHeaviestAnimal6() {
         List<Animal> animals = createAnimals();
         Map<Animal.Type, Animal> expectedHeaviestAnimals = new HashMap<>();
