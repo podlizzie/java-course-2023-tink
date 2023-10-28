@@ -64,7 +64,8 @@ public class AnimalAction {
      */
     public static Animal findTheLongestName(@NotNull List<Animal> animals) {
         return animals.stream()
-            .max(Comparator.comparing(animal -> animal.name().length()))
+            .max(Comparator.comparing(animal -> animal.name()
+                .length()))
             .orElse(null);
     }
 
@@ -165,5 +166,111 @@ public class AnimalAction {
             .filter(animal -> animal.weight() > animal.height())
             .count());
     }
+
+    /**
+     * Задача 13: находит список животных, имена которых состоят из более чем двух слов
+     *
+     * @param animals список животных
+     * @return список животных, имена которых состоят из более чем двух слов
+     */
+    public static List<Animal> findAnimalsWithNameBigThanTwoWords(@NotNull List<Animal> animals) {
+        return animals.stream()
+            .filter(animal -> animal.name().split(" ").length > 2)
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Задача 14: Есть ли в списке собака ростом более k см
+     *
+     * @param animals список животных
+     * @param k       см
+     * @return true or false
+     */
+    public static @NotNull Boolean findDogWithHeightMoreThanK(@NotNull List<Animal> animals, double k) {
+        return animals.stream()
+            .anyMatch(animal -> animal.type().equals(Animal.Type.DOG) && animal.height() > k);
+    }
+
+    /**
+     * Задача 15: Найти суммарный вес животных каждого вида, которым от k до l лет
+     *
+     * @param animals список животных
+     * @param k       нижняя граница возрастов
+     * @param l       верхняя граница возрастов
+     * @return суммарный вес животных каждого вида, которым от k до l лет
+     */
+    public static @NotNull Integer findSumWeightBetweenKAndLYears(@NotNull List<Animal> animals, int k, int l) {
+        return animals.stream()
+            .filter(animal -> animal.age() > k && animal.age() < l)
+            .mapToInt(Animal::weight).sum();
+    }
+
+    /**
+     * Задача 16: Список животных, отсортированный по виду, затем по полу, затем по имени
+     *
+     * @param animals список животных
+     * @return список таких животных
+     */
+    public static List<Animal> sortAnimalsByTypeSexAndName(@NotNull List<Animal> animals) {
+        return animals.stream()
+            .sorted(Comparator
+                .comparing(Animal::type)
+                .thenComparing(Animal::sex)
+                .thenComparing(Animal::name))
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Задача 17: Правда ли, что пауки кусаются чаще, чем собаки -> Boolean
+     *
+     * @param animals список животных
+     * @return true or false
+     */
+    public static @NotNull Boolean areSpidersBitesMoreThanDogs(@NotNull List<Animal> animals) {
+        long biteDogs = animals.stream()
+            .filter(animal -> animal.type().equals(Animal.Type.DOG) && animal.bites())
+            .count();
+
+        long biteSpiders = animals.stream()
+            .filter(animal -> animal.type().equals(Animal.Type.SPIDER) && animal.bites())
+            .count();
+
+        return biteSpiders > biteDogs;
+    }
+
+    /**
+     * Задача 18: Найти самую тяжелую рыбку в 2-х или более списках
+     *
+     * @param animals список животных
+     * @return самую тяжелую рыбку в 2-х или более списках
+     */
+    public static Animal findHaviestFishInLists(@NotNull List<List<Animal>> animals) {
+        return animals.stream()
+            .flatMap(List::stream)
+            .filter(animal -> animal.type().equals(Animal.Type.FISH))
+            .max(Comparator.comparing(Animal::weight))
+            .orElse(null);
+    }
+
+    /**
+     * Задача 19: Животные, в записях о которых есть ошибки: вернуть имя и список ошибок
+     *
+     * @param animals список животных
+     * @return
+     */
+//    public static Map<String, Set<ValidationError>> findHaviestFishInLists(@NotNull List<List<Animal>> animals) {
+//
+//    }
+
+    /**
+     * Задача 20: Сделать результат предыдущего задания более читабельным:
+     * вернуть имя и названия полей с ошибками, объединенные в строку
+     *
+     * @param animals список животных
+     * @return Map <String, String>
+     */
+//    public static Map<String, Set<ValidationError>> findHaviestFishInLists(@NotNull List<List<Animal>> animals) {
+//
+//    }
 
 }

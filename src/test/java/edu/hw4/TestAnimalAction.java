@@ -12,13 +12,21 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class TestAnimalAction {
     private static @NotNull List<Animal> createAnimals() {
         return Arrays.asList(
-            new Animal("Ronaldo", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true),
+            new Animal("mr big boy", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true),
             new Animal("Samba", Animal.Type.CAT, Animal.Sex.F, 3, 20, 4, false),
             new Animal("Mars", Animal.Type.DOG, Animal.Sex.M, 5, 30, 8, true),
             new Animal("Tasya", Animal.Type.DOG, Animal.Sex.F, 4, 28, 7, true),
             new Animal("Fifi", Animal.Type.BIRD, Animal.Sex.F, 2, 10, 1, false),
             new Animal("Nemo", Animal.Type.FISH, Animal.Sex.M, 1, 5, 6, false),
             new Animal("Semion", Animal.Type.SPIDER, Animal.Sex.M, 2, 2, 0, true)
+        );
+    }
+
+    private static @NotNull List<Animal> createAnimals2() {
+        return Arrays.asList(
+            new Animal("little boy", Animal.Type.CAT, Animal.Sex.M, 4, 10, 5, true),
+            new Animal("Pasha", Animal.Type.FISH, Animal.Sex.F, 1, 5, 7, false),
+            new Animal("Victoria", Animal.Type.FISH, Animal.Sex.M, 2, 2, 3, true)
         );
     }
 
@@ -68,8 +76,8 @@ public class TestAnimalAction {
         List<Animal> animals = createAnimals();
         Animal animalWithLongestName = AnimalAction.findTheLongestName(animals);
 
-        int lenghtOfName = (animalWithLongestName.name()).length();
-        int expectedLenght = 7;
+        int lenghtOfName = (animalWithLongestName.name()).replace(" ", "").length();
+        int expectedLenght = 8;
 
         assertThat(lenghtOfName).isEqualTo(expectedLenght);
     }
@@ -80,7 +88,7 @@ public class TestAnimalAction {
         Map<Animal.Type, Animal> expectedHeaviestAnimals = new HashMap<>();
         expectedHeaviestAnimals.put(
             Animal.Type.CAT,
-            new Animal("Ronaldo", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true)
+            new Animal("mr big boy", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true)
         );
         expectedHeaviestAnimals.put(
             Animal.Type.DOG,
@@ -157,7 +165,7 @@ public class TestAnimalAction {
     public void testThatGetBitingAnimalsWithHeightGreaterThan100ReturnedCorrectList11() {
         List<Animal> animals = createAnimals();
         List<Animal> expectedList = List.of(
-            new Animal("Ronaldo", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true));
+            new Animal("mr big boy", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true));
 
         List<Animal> actualList = AnimalAction.getBitingAnimalsWithHeightGreaterThan100(animals);
 
@@ -172,6 +180,65 @@ public class TestAnimalAction {
         int actualCount = AnimalAction.findCountAnimalsWithWeightGreaterThanHeight(animals);
 
         assertThat(actualCount).isEqualTo(expectedCount);
+    }
+
+    @Test
+    void testThatFindAnimalsWithNameBigThanTwoWordsReturnedCorrectResults13() {
+        List<Animal> animals = createAnimals();
+        List<Animal> expectedAnimals = Arrays.asList(
+            new Animal("mr big boy", Animal.Type.CAT, Animal.Sex.M, 4, 101, 5, true)
+        );
+
+        List<Animal> result = AnimalAction.findAnimalsWithNameBigThanTwoWords(animals);
+
+        assertThat(result).isEqualTo(expectedAnimals);
+    }
+
+    @Test
+    void testThatFindDogWithHeightMoreThanKReturnedCorrectResult14() {
+        List<Animal> animals = createAnimals();
+        double k = 25;
+
+        Boolean result = AnimalAction.findDogWithHeightMoreThanK(animals, k);
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void testThatFindSumWeightBetweenKAndLYearsReturnedCorrectResult15() {
+        List<Animal> animals = createAnimals();
+        int k = 3;
+        int l = 5;
+        int expectedWeight = 12;
+
+        Integer result = AnimalAction.findSumWeightBetweenKAndLYears(animals, k, l);
+
+        assertThat(result).isEqualTo(expectedWeight);
+    }
+
+    @Test
+    void testThatSortAnimalsByTypeSexNameReturnedCorrectResult16() {
+
+    }
+
+    @Test
+    void testThatAreSpidersBitesMoreThanDogsReturnedCorrectResult17() {
+        List<Animal> animals = createAnimals();
+        Boolean expected = false;
+
+        Boolean result = AnimalAction.areSpidersBitesMoreThanDogs(animals);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void testThatFindHaviestFishInListsReturnedCorrectResult18() {
+        List<List<Animal>> animalsLists = Arrays.asList(createAnimals(), createAnimals2());
+        Animal expected = new Animal("Pasha", Animal.Type.FISH, Animal.Sex.F, 1, 5, 7, false);
+
+        Animal result = AnimalAction.findHaviestFishInLists(animalsLists);
+
+        assertThat(result).isEqualTo(expected);
     }
 
 }
