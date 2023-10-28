@@ -1,11 +1,11 @@
-package edu.hw3.task7;
+package edu.hw3;
 
 import java.util.Comparator;
 
-public class NullComparator<K> implements Comparator<K> {
+public class Task7<K> implements Comparator<K> {
     private final Comparator<? super K> comparator;
 
-    public NullComparator(Comparator<? super K> comparator) {
+    public Task7(Comparator<? super K> comparator) {
         this.comparator = comparator;
     }
 
