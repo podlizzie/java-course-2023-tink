@@ -16,10 +16,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 1: сортирует животных по росту от самого маленького к самому большому.
+     * Task 1: Sorts animals by height from smallest to largest.
      *
-     * @param animals список животных
-     * @return отсортированный список животных
+     * @param animals the list of animals
+     * @return the sorted list of animals
      */
     public static List<Animal> sortHeight(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -28,12 +28,11 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 2: сортирует животных по весу от самого
-     * тяжелого к самому легкому, выбрать k первых.
+     * Task 2: Sorts animals by weight from heaviest to lightest and selects the first k animals.
      *
-     * @param animals список животных
-     * @param k       количество животных
-     * @return отсортированный список k первых животных
+     * @param animals the list of animals
+     * @param k       the number of animals to select
+     * @return the sorted list of the first k animals
      */
     public static List<Animal> sortWeight(@NotNull List<Animal> animals, int k) {
         return animals.stream()
@@ -43,10 +42,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 3: считает сколько животных каждого вида
+     * Task 3: Counts the number of animals for each type.
      *
-     * @param animals список животных
-     * @return Map (key - type, value - count)
+     * @param animals the list of animals
+     * @return a map containing animal types as keys and the count of animals as values
      */
     public static Map<Animal.Type, Integer> countType(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -57,10 +56,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 4: находит животное с самым длинным именем.
+     * Task 4: Finds the animal with the longest name.
      *
-     * @param animals список животных
-     * @return Animal одно из животных с самым длинным именем
+     * @param animals the list of animals
+     * @return one of the animals with the longest name
      */
     public static Animal findTheLongestName(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -70,20 +69,20 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 5: находит пол, где количество животных наибольшее
+     * Task 5: Finds the predominant sex, i.e., the sex with the highest count of animals.
      *
-     * @param animals список животных
-     * @return Animal.Sex преобладающий пол
+     * @param animals the list of animals
+     * @return the predominant sex (Animal.Sex)
      */
 //    public static Animal.Sex predominantSex(@NotNull List<Animal> animals){
 //        return animals.stream().collect(Collectors.groupingBy(Animal::sex, Collectors.counting()))
 //    }
 
     /**
-     * Задача 6: находит cамое тяжелое животное каждого вида
+     * Task 6: Finds the heaviest animal of each type.
      *
-     * @param animals список животных
-     * @return Map (key - type, value - animal)
+     * @param animals the list of animals
+     * @return a map containing animal types as keys and the heaviest animal of each type as values
      */
     public static Map<Animal.Type, Animal> findHeaviestAnimalSpecies(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -95,10 +94,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 7: находит cамое старое животное
+     * Task 7: Finds the oldest animal.
      *
-     * @param animals список животных
-     * @return Animal одно из самых старых животных
+     * @param animals the list of animals
+     * @return one of the oldest animals
      */
     public static Animal findOldestAnimal(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -107,11 +106,11 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 8: находит cамое тяжелое животное среди животных ниже k см
+     * Task 8: Finds the heaviest animal among the animals below the given height (k).
      *
-     * @param animals список животных
-     * @param k       см
-     * @return cамое тяжелое животное среди животных ниже k см
+     * @param animals the list of animals
+     * @param k       the maximum height under which the animal should be
+     * @return the heaviest animal below the given height
      */
     public static @NotNull Optional<Animal> findWeightAnimalBelowK(@NotNull List<Animal> animals, double k) {
         return animals.stream()
@@ -120,10 +119,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 9: находит cколько в сумме лап у животных в списке
+     * Task 9: Calculates the sum of paws for all animals in the list.
      *
-     * @param animals список животных
-     * @return Integer количество лап
+     * @param animals the list of animals
+     * @return the sum of paws
      */
     public static @NotNull Integer getSumOfPaws(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -131,10 +130,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 10: находит cписок животных, возраст у которых не совпадает с количеством лап
+     * Task 10: Finds the list of animals whose age does not match the number of paws.
      *
-     * @param animals список животных
-     * @return список таких животных
+     * @param animals the list of animals
+     * @return the list of animals whose age does not match the number of paws
      */
     public static List<Animal> getAgeNotMatchingPaws(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -143,11 +142,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 11: находит список животных, которые могут укусить
-     * (bites == null или true) и рост которых превышает 100 см
+     * Task 11: Finds the list of animals that can bite (bites == null or true) and have a height greater than 100 cm.
      *
-     * @param animals список животных
-     * @return список таких животных
+     * @param animals the list of animals
+     * @return the list of animals that can bite and have a height greater than 100 cm
      */
     public static List<Animal> getBitingAnimalsWithHeightGreaterThan100(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -156,10 +154,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 12: находит сколько в списке животных, вес которых превышает рост
+     * Task 12: Finds the count of animals whose weight exceeds their height.
      *
-     * @param animals список животных
-     * @return Integer количество животных, вес которых превышает рост
+     * @param animals the list of animals
+     * @return the count of animals whose weight exceeds their height
      */
     public static @NotNull Integer findCountAnimalsWithWeightGreaterThanHeight(@NotNull List<Animal> animals) {
         return Math.toIntExact(animals.stream()
@@ -168,10 +166,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 13: находит список животных, имена которых состоят из более чем двух слов
+     * Task 13: Finds the list of animals whose names consist of more than two words.
      *
-     * @param animals список животных
-     * @return список животных, имена которых состоят из более чем двух слов
+     * @param animals the list of animals
+     * @return the list of animals whose names consist of more than two words
      */
     public static List<Animal> findAnimalsWithNameBigThanTwoWords(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -180,10 +178,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 14: Есть ли в списке собака ростом более k см
+     * Task 14: Checks if there is a dog in the list with a height greater than k centimeters.
      *
-     * @param animals список животных
-     * @param k       см
+     * @param animals the list of animals
+     * @param k       the height in centimeters
      * @return true or false
      */
     public static @NotNull Boolean findDogWithHeightMoreThanK(@NotNull List<Animal> animals, double k) {
@@ -192,12 +190,12 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 15: Найти суммарный вес животных каждого вида, которым от k до l лет
+     * Task 15: Calculates the sum of weights of the animals of each type, whose age is between k and l.
      *
-     * @param animals список животных
-     * @param k       нижняя граница возрастов
-     * @param l       верхняя граница возрастов
-     * @return суммарный вес животных каждого вида, которым от k до l лет
+     * @param animals the list of animals
+     * @param k       the lower age limit
+     * @param l       the upper age limit
+     * @return the sum of weights of animals of each type, within the age range [k, l]
      */
     public static @NotNull Integer findSumWeightBetweenKAndLYears(@NotNull List<Animal> animals, int k, int l) {
         return animals.stream()
@@ -206,10 +204,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 16: Список животных, отсортированный по виду, затем по полу, затем по имени
+     * Task 16: Sorts the list of animals by type, then by sex, then by name.
      *
-     * @param animals список животных
-     * @return список таких животных
+     * @param animals the list of animals
+     * @return the sorted list of animals
      */
     public static List<Animal> sortAnimalsByTypeSexAndName(@NotNull List<Animal> animals) {
         return animals.stream()
@@ -221,10 +219,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 17: Правда ли, что пауки кусаются чаще, чем собаки -> Boolean
+     * Task 17: Checks if spiders bite more often than dogs.
      *
-     * @param animals список животных
-     * @return true or false
+     * @param animals the list of animals
+     * @return true if spiders bite more often than dogs, false otherwise
      */
     public static @NotNull Boolean areSpidersBitesMoreThanDogs(@NotNull List<Animal> animals) {
         long biteDogs = animals.stream()
@@ -239,10 +237,10 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 18: Найти самую тяжелую рыбку в 2-х или более списках
+     * Task 18: Finds the heaviest fish among the animals in 2 or more lists.
      *
-     * @param animals список животных
-     * @return самую тяжелую рыбку в 2-х или более списках
+     * @param animals the list of animal lists
+     * @return the heaviest fish among the animals in the lists
      */
     public static Animal findHaviestFishInLists(@NotNull List<List<Animal>> animals) {
         return animals.stream()
@@ -253,21 +251,20 @@ public class AnimalAction {
     }
 
     /**
-     * Задача 19: Животные, в записях о которых есть ошибки: вернуть имя и список ошибок
+     * Task 19: Finds the animals in the list that have errors in their records and returns their names and the list of errors.
      *
-     * @param animals список животных
-     * @return
+     * @param animals the list of animals
+     * @return the map containing the animal names as keys and the set of errors as values
      */
 //    public static Map<String, Set<ValidationError>> findHaviestFishInLists(@NotNull List<List<Animal>> animals) {
 //
 //    }
 
     /**
-     * Задача 20: Сделать результат предыдущего задания более читабельным:
-     * вернуть имя и названия полей с ошибками, объединенные в строку
+     * Task 20: Makes the result of the previous task more readable by returning the animal names and the field names with errors as a human-readable string.
      *
-     * @param animals список животных
-     * @return Map <String, String>
+     * @param animals the list of animals
+     * @return the map containing the animal names as keys and the concatenated string of field names with errors as values
      */
 //    public static Map<String, Set<ValidationError>> findHaviestFishInLists(@NotNull List<List<Animal>> animals) {
 //
