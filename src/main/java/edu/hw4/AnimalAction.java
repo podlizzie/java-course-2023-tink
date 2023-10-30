@@ -1,6 +1,5 @@
 package edu.hw4;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -285,20 +284,13 @@ public class AnimalAction {
      * @return the map containing the animal names as keys and the
      * concatenated string of field names with errors as values
      */
-    @SuppressWarnings("MultipleStringLiterals")
     public static Map<String, String> findReadableErrors(@NotNull List<Animal> animals) {
         return animals.stream()
-            .flatMap(animal -> AnimalValidation.validateAnimal(animal)
-                .stream()
-                .map(error -> animal.name() + ": " + error.getBody() + " : " + error.getErrorMessage()))
-            .collect(Collectors.groupingBy(
-                nameAndField -> nameAndField.split(":")[0].trim(),
-                Collectors.mapping(nameAndField -> {
-                    String[] parts = nameAndField.split(":");
-                    String field = parts[1].trim();
-                    String message = String.join(" ", Arrays.copyOfRange(parts, 2, parts.length)).trim();
-                    return field + " : " + message;
-                }, Collectors.joining(", "))
+            .collect(Collectors.toMap(
+                Animal::name,
+                animal -> AnimalValidation.validateAnimal(animal).stream()
+                    .map(error -> String.format("%s : %s", error.getBody(), error.getErrorMessage()))
+                    .collect(Collectors.joining(", "))
             ));
     }
 }

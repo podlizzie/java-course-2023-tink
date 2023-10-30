@@ -287,10 +287,10 @@ public class TestAnimalAction {
     void testThatFindReadableErrorsReturned() {
         List<Animal> animals = createTheSecondGroupOfAnimals();
         Map<String, String> readableErrors = AnimalAction.findReadableErrors(animals);
-        String expectedOut = "height : Invalid param  1000, age : Invalid param  -2, weight : Invalid param  0";
+        String expectedOut = "height : Invalid param: 1000, age : Invalid param: -2, weight : Invalid param: 0";
 
-        assertThat(readableErrors.get("little boy")).isEqualTo(null);
-        assertThat(readableErrors.get("Pasha")).isEqualTo(null);
+        assertThat(readableErrors.get("little boy")).isEqualTo("");
+        assertThat(readableErrors.get("Pasha")).isEqualTo("");
         assertThat(readableErrors.get("Victoria"))
             .isEqualTo(expectedOut);
     }
