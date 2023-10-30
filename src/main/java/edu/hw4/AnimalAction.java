@@ -1,10 +1,12 @@
 package edu.hw4;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.jetbrains.annotations.NotNull;
 
@@ -74,7 +76,7 @@ public class AnimalAction {
      * @param animals the list of animals
      * @return the predominant sex (Animal.Sex)
      */
-    public static Animal.Sex predominantSex(List<Animal> animals) {
+    public static Animal.Sex predominantSex(@NotNull List<Animal> animals) {
         return animals.stream()
             .collect(Collectors.groupingBy(Animal::sex, Collectors.counting()))
             .entrySet()
@@ -262,9 +264,17 @@ public class AnimalAction {
      * @param animals the list of animals
      * @return the map containing the animal names as keys and the set of errors as values
      */
-//    public static Map<String, Set<ValidationError>> findHaviestFishInLists(@NotNull List<List<Animal>> animals) {
-//
-//    }
+    public static Map<String, Set<ValidationError>> findErrors(@NotNull List<Animal> animals) {
+        return animals.stream()
+            .collect(Collectors.toMap(
+                Animal::name,
+                AnimalValidation::validateAnimal,
+                (currentErrors, newErrors) -> {
+                    currentErrors.addAll(newErrors);
+                    return currentErrors;
+                }
+            ));
+    }
 
     /**
      * Task 20: Makes the result of the previous task more readable by returning the animal names and the field names with errors as a human-readable string.
@@ -272,8 +282,19 @@ public class AnimalAction {
      * @param animals the list of animals
      * @return the map containing the animal names as keys and the concatenated string of field names with errors as values
      */
-//    public static Map<String, Set<ValidationError>> findHaviestFishInLists(@NotNull List<List<Animal>> animals) {
-//
-//    }
-
+    public static Map<String, String> findReadableErrors(@NotNull List<Animal> animals) {
+        return animals.stream()
+            .flatMap(animal -> AnimalValidation.validateAnimal(animal)
+                .stream()
+                .map(error -> animal.name() + ": " + error.getBody() + " : " + error.getErrorMessage()))
+            .collect(Collectors.groupingBy(
+                nameAndField -> nameAndField.split(":")[0].trim(),
+                Collectors.mapping(nameAndField -> {
+                    String[] parts = nameAndField.split(":");
+                    String field = parts[1].trim();
+                    String message = String.join(" ", Arrays.copyOfRange(parts, 2, parts.length)).trim();
+                    return field + " : " + message;
+                }, Collectors.joining(", "))
+            ));
+    }
 }
