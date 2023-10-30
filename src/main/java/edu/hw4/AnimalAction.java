@@ -259,7 +259,8 @@ public class AnimalAction {
     }
 
     /**
-     * Task 19: Finds the animals in the list that have errors in their records and returns their names and the list of errors.
+     * Task 19: Finds the animals in the list that have errors in their records and returns
+     * their names and the list of errors.
      *
      * @param animals the list of animals
      * @return the map containing the animal names as keys and the set of errors as values
@@ -277,11 +278,14 @@ public class AnimalAction {
     }
 
     /**
-     * Task 20: Makes the result of the previous task more readable by returning the animal names and the field names with errors as a human-readable string.
+     * Task 20: Makes the result of the previous task more readable by returning the animal
+     * names and the field names with errors as a human-readable string.
      *
      * @param animals the list of animals
-     * @return the map containing the animal names as keys and the concatenated string of field names with errors as values
+     * @return the map containing the animal names as keys and the
+     * concatenated string of field names with errors as values
      */
+    @SuppressWarnings("MultipleStringLiterals")
     public static Map<String, String> findReadableErrors(@NotNull List<Animal> animals) {
         return animals.stream()
             .flatMap(animal -> AnimalValidation.validateAnimal(animal)
