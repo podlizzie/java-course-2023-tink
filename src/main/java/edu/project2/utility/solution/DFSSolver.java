@@ -64,10 +64,11 @@ public class DFSSolver implements Solver {
         List<Coordinate> neighbors = MazeUtils.findNeighbors(maze, current, visited);
         for (Coordinate neighbor : neighbors) {
             dfs(maze, neighbor, end, visited, path);
-            if (path.contains(end)) {
-                path.add(current);
-                return;
-            }
+        }
+
+        if (path.contains(end)) {
+            path.add(current);
         }
     }
+
 }
