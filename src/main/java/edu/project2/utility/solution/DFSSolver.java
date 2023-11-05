@@ -4,10 +4,10 @@ import edu.project2.model.Cell;
 import edu.project2.model.Coordinate;
 import edu.project2.model.Maze;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 public class DFSSolver implements Solver {
 
@@ -22,7 +22,6 @@ public class DFSSolver implements Solver {
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         List<Coordinate> path = new ArrayList<>();
-        Stack<Coordinate> stack = new Stack<>();
         Map<Coordinate, Coordinate> parentMap = new HashMap<>();
         boolean[][] visited = new boolean[maze.height()][maze.width()];
 
@@ -35,41 +34,39 @@ public class DFSSolver implements Solver {
             return path;
         }
 
-        stack.push(start);
         visited[start.row()][start.col()] = true;
-
-        dfs(maze, stack, visited, parentMap, end);
+        dfs(maze, start, end, visited, path);
 
         Coordinate current = end;
         while (current != null) {
             path.add(0, current);
             current = parentMap.get(current);
         }
+        Collections.reverse(path);
 
         return path;
     }
 
     private void dfs(
         Maze maze,
-        Stack<Coordinate> stack,
+        Coordinate current,
+        Coordinate end,
         boolean[][] visited,
-        Map<Coordinate, Coordinate> parentMap,
-        Coordinate end
+        List<Coordinate> path
     ) {
-        while (!stack.isEmpty()) {
-            Coordinate current = stack.pop();
+        if (current.equals(end)) {
+            path.add(current);
+            return;
+        }
 
-            if (current.equals(end)) {
+        visited[current.row()][current.col()] = true;
+
+        List<Coordinate> neighbors = MazeUtils.findNeighbors(maze, current, visited);
+        for (Coordinate neighbor : neighbors) {
+            dfs(maze, neighbor, end, visited, path);
+            if (path.contains(end)) {
+                path.add(current);
                 return;
-            }
-
-            List<Coordinate> neighbors = MazeUtils.findUnvisited(maze, current, visited);
-            for (Coordinate neighbor : neighbors) {
-                if (!visited[neighbor.row()][neighbor.col()]) {
-                    stack.push(neighbor);
-                    visited[neighbor.row()][neighbor.col()] = true;
-                    parentMap.put(neighbor, current);
-                }
             }
         }
     }

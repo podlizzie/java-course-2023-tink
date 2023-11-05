@@ -3,6 +3,7 @@ package edu.project2;
 import edu.project2.model.Coordinate;
 import edu.project2.model.Maze;
 import edu.project2.utility.generation.DFSGeneration;
+import edu.project2.utility.solution.BFSSolver;
 import edu.project2.utility.solution.DFSSolver;
 import edu.project2.view.ConsoleRenderer;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Main {
         ConsoleRenderer renderer = new ConsoleRenderer();
         System.out.println(renderer.render(maze));
 
-        DFSSolver dfsSolver = new DFSSolver();
+        BFSSolver dfsSolver = new BFSSolver();
         List<Coordinate> path = dfsSolver.solve(maze, start, end);
         System.out.println(renderer.render(maze, path));
 

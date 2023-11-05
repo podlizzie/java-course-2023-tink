@@ -20,7 +20,7 @@ public class MazeUtils {
      * @param visited    the array of visited cells
      * @return the list of unvisited neighbors
      */
-    public static List<Coordinate> findUnvisited(Maze maze, Coordinate coordinate, boolean[][] visited) {
+    public static List<Coordinate> findNeighbors(Maze maze, Coordinate coordinate, boolean[][] visited) {
         return getNeighbors(coordinate)
             .filter(neighbor -> isValidNeighbor(neighbor, maze, visited))
             .collect(Collectors.toList());

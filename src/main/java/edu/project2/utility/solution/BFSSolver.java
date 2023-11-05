@@ -64,13 +64,11 @@ public class BFSSolver implements Solver {
                 return;
             }
 
-            List<Coordinate> neighbors = MazeUtils.findUnvisited(maze, current, visited);
+            List<Coordinate> neighbors = MazeUtils.findNeighbors(maze, current, visited);
             for (Coordinate neighbor : neighbors) {
-                if (!visited[neighbor.row()][neighbor.col()]) {
-                    queue.offer(neighbor);
-                    visited[neighbor.row()][neighbor.col()] = true;
-                    parentMap.put(neighbor, current);
-                }
+                queue.offer(neighbor);
+                visited[neighbor.row()][neighbor.col()] = true;
+                parentMap.put(neighbor, current);
             }
         }
     }
