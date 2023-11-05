@@ -1,13 +1,19 @@
 package edu.project2.utility.solution;
 
+import edu.project2.model.Cell;
 import edu.project2.model.Coordinate;
 import edu.project2.model.Maze;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 public class BFSSolver implements Solver {
 
     /**
-     * Solves the maze using start and end coordinates.
+     * Solves the maze using the Shortest pathfinder(BFS) algorithm.
      *
      * @param maze  the maze to solve
      * @param start the start coordinate
@@ -16,6 +22,56 @@ public class BFSSolver implements Solver {
      */
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
-        return null;
+        List<Coordinate> path = new ArrayList<>();
+        Queue<Coordinate> queue = new LinkedList<>();
+        Map<Coordinate, Coordinate> parentMap = new HashMap<>();
+        boolean[][] visited = new boolean[maze.height()][maze.width()];
+
+        if (!MazeUtils.isWithinBounds(start, maze) || !MazeUtils.isWithinBounds(end, maze)) {
+            throw new IllegalArgumentException("Start or end coordinates are out of bounds.");
+        }
+
+        if (maze.grid()[start.row()][start.col()].getType() == Cell.Type.WALL
+            || maze.grid()[end.row()][end.col()].getType() == Cell.Type.WALL) {
+            return path;
+        }
+
+        queue.offer(start);
+        visited[start.row()][start.col()] = true;
+
+        bfs(maze, queue, visited, parentMap, end);
+
+        Coordinate current = end;
+        while (current != null) {
+            path.add(0, current);
+            current = parentMap.get(current);
+        }
+
+        return path;
+    }
+
+    private void bfs(
+        Maze maze,
+        Queue<Coordinate> queue,
+        boolean[][] visited,
+        Map<Coordinate, Coordinate> parentMap,
+        Coordinate end
+    ) {
+        while (!queue.isEmpty()) {
+            Coordinate current = queue.poll();
+
+            if (current.equals(end)) {
+                return;
+            }
+
+            List<Coordinate> neighbors = MazeUtils.findUnvisited(maze, current, visited);
+            for (Coordinate neighbor : neighbors) {
+                if (!visited[neighbor.row()][neighbor.col()]) {
+                    queue.offer(neighbor);
+                    visited[neighbor.row()][neighbor.col()] = true;
+                    parentMap.put(neighbor, current);
+                }
+            }
+        }
     }
 }

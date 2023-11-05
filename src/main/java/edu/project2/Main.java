@@ -16,8 +16,8 @@ public class Main {
     public static void main(String[] args) {
         int height = 10;
         int width = 30;
-        Coordinate coordinate1 = new Coordinate(0, 0);
-        Coordinate coordinate2 = new Coordinate(8, 147);
+        Coordinate start = new Coordinate(0, 0);
+        Coordinate end = new Coordinate(8, 14);
 
         DFSGeneration generator = new DFSGeneration();
         Maze maze = generator.generate(height, width);
@@ -25,7 +25,7 @@ public class Main {
         System.out.println(renderer.render(maze));
 
         DFSSolver dfsSolver = new DFSSolver();
-        List<Coordinate> path = dfsSolver.solve(maze, coordinate1, coordinate2);
+        List<Coordinate> path = dfsSolver.solve(maze, start, end);
         System.out.println(renderer.render(maze, path));
 
     }
