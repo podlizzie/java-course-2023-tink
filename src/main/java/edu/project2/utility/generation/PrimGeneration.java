@@ -22,7 +22,8 @@ public class PrimGeneration implements Generator {
     public Maze generate(int height, int width) {
         GenerationUtils.checkInput(height, width);
 
-        Maze maze = GenerationUtils.initializeMaze(height, width);
+        Cell[][] grid = new Cell[height][width];
+        Maze maze = GenerationUtils.initializeMaze(height, width, grid);
         List<Coordinate> path = new ArrayList<>();
 
         // Choose a random starting cell

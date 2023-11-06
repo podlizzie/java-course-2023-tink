@@ -22,13 +22,7 @@ public class DFSGeneration implements Generator {
         GenerationUtils.checkInput(height, width);
 
         Cell[][] grid = new Cell[height][width];
-
-        // Initialize maze with walls
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                grid[row][col] = new Cell(row, col, Cell.Type.WALL);
-            }
-        }
+        GenerationUtils.initializeMaze(height, width, grid);
 
         Random random = new Random();
         Stack<Coordinate> stack = new Stack<>();

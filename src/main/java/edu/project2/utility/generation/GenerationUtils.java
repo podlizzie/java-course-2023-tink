@@ -42,8 +42,7 @@ public class GenerationUtils {
         return neighbors;
     }
 
-    public static Maze initializeMaze(int height, int width) {
-        Cell[][] grid = new Cell[height][width];
+    public static Maze initializeMaze(int height, int width, Cell[][] grid) {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 grid[row][col] = new Cell(row, col, Cell.Type.WALL);
