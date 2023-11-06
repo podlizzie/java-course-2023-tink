@@ -52,7 +52,7 @@ public class GenerationUtils {
         return new Maze(height, width, grid);
     }
 
-    public static void checkInput(int height, int width){
+    public static void checkInput(int height, int width) {
         if (height <= 0 || width <= 0) {
             throw new IllegalArgumentException("Height and width must be greater than 0");
         }
