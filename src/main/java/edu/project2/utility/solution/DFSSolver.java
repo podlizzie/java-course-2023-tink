@@ -25,7 +25,7 @@ public class DFSSolver implements Solver {
         Map<Coordinate, Coordinate> parentMap = new HashMap<>();
         boolean[][] visited = new boolean[maze.height()][maze.width()];
 
-        if (!MazeUtils.isWithinBounds(start, maze) || !MazeUtils.isWithinBounds(end, maze)) {
+        if (!SolutionUtils.isWithinBounds(start, maze) || !SolutionUtils.isWithinBounds(end, maze)) {
             throw new IllegalArgumentException("Start or end coordinates are out of bounds.");
         }
 
@@ -61,7 +61,7 @@ public class DFSSolver implements Solver {
 
         visited[current.row()][current.col()] = true;
 
-        List<Coordinate> neighbors = MazeUtils.findNeighbors(maze, current, visited);
+        List<Coordinate> neighbors = SolutionUtils.findNeighbors(maze, current, visited);
         for (Coordinate neighbor : neighbors) {
             dfs(maze, neighbor, end, visited, path);
         }

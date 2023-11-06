@@ -27,7 +27,7 @@ public class BFSSolver implements Solver {
         Map<Coordinate, Coordinate> parentMap = new HashMap<>();
         boolean[][] visited = new boolean[maze.height()][maze.width()];
 
-        if (!MazeUtils.isWithinBounds(start, maze) || !MazeUtils.isWithinBounds(end, maze)) {
+        if (!SolutionUtils.isWithinBounds(start, maze) || !SolutionUtils.isWithinBounds(end, maze)) {
             throw new IllegalArgumentException("Start or end coordinates are out of bounds.");
         }
 
@@ -64,7 +64,7 @@ public class BFSSolver implements Solver {
                 return;
             }
 
-            List<Coordinate> neighbors = MazeUtils.findNeighbors(maze, current, visited);
+            List<Coordinate> neighbors = SolutionUtils.findNeighbors(maze, current, visited);
             for (Coordinate neighbor : neighbors) {
                 queue.offer(neighbor);
                 visited[neighbor.row()][neighbor.col()] = true;
