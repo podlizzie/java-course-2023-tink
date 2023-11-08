@@ -32,7 +32,7 @@ public class Task7Test {
     @ParameterizedTest
     @ValueSource(strings = {
         "0",
-        "101",
+        "0100",
         "1101",
         "111111"
     })

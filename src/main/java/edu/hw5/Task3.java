@@ -28,7 +28,7 @@ public class Task3 {
             date = parseWithFormat(string, DATE_FORMAT_3);
         }
 
-        // Handle special cases
+        // Other formats
         if (date.isEmpty()) {
             String[] parts = string.split(" ");
             if (parts.length == LENGHT_OF_FORMAT_X_DAYS_AGO && (parts[1].equalsIgnoreCase("days")
