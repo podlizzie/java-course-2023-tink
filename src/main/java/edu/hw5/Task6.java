@@ -9,7 +9,7 @@ public class Task6 {
 
     }
 
-    public static Boolean isSubsequence(@NotNull String allStr, @NotNull String subsequence) {
-        return allStr.matches(".*" + Pattern.quote(subsequence) + ".*");
+    public static Boolean isSubsequence(@NotNull String allStr, @NotNull String maybeSubsequence) {
+        return allStr.matches(".*" + Pattern.quote(maybeSubsequence) + ".*");
     }
 }
