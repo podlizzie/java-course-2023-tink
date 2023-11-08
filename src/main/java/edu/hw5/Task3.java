@@ -8,6 +8,8 @@ public class Task3 {
     private static final String DATE_FORMAT_1 = "yyyy-MM-dd";
     private static final String DATE_FORMAT_2 = "M/d/yyyy";
     private static final String DATE_FORMAT_3 = "M/d/yy";
+    private static final String DATE_FORMAT_4 = "yyyy-MM-d";
+
     private static final int LENGHT_OF_FORMAT_X_DAYS_AGO = 3;
 
     private Task3() {
@@ -26,6 +28,11 @@ public class Task3 {
         // Attempt to parse the string as "M/d/yy" format
         if (date.isEmpty()) {
             date = parseWithFormat(string, DATE_FORMAT_3);
+        }
+
+        // Attempt to parse the string as "yyyy-MM-d" format
+        if (date.isEmpty()) {
+            date = parseWithFormat(string, DATE_FORMAT_4);
         }
 
         // Other formats

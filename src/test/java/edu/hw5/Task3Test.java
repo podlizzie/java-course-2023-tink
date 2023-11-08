@@ -17,6 +17,16 @@ public class Task3Test {
     }
 
     @Test
+    public void testThatDateStringIsParsedWithImplicitDay() {
+        String date = "2020-12-2";
+        LocalDate expected = LocalDate.of(2020, 12, 2);
+
+        Optional<LocalDate> result = Task3.parseDate(date);
+
+        assertThat(result).isEqualTo(Optional.of(expected));
+    }
+
+    @Test
     public void testThatDateStringIsParsedAsCustomFormat() {
         String date = "12/2/2020";
         LocalDate expected = LocalDate.of(2020, 12, 2);
