@@ -16,15 +16,15 @@ public class Task8 {
         return str.matches(ODD_LENGHT_STRING_PATTERN);
     }
 
-    public static Boolean IsNot11Or111(@NotNull String str) {
+    public static Boolean isNot11Or111(@NotNull String str) {
         return str.matches(NOT_11_OR_111_PATTERN);
     }
 
-    public static Boolean IsMultipleOf3Zeros(@NotNull String str) {
+    public static Boolean isMultipleOf3Zeros(@NotNull String str) {
         return str.matches(COUNT_OF_0_MULTIPLY_3_PATTERN);
     }
 
-    public static Boolean IsOddPositionIs1(@NotNull String str) {
+    public static Boolean isOddPositionIs1(@NotNull String str) {
         return str.matches(ODD_POSITION_IS_1_PATTERN);
     }
 }

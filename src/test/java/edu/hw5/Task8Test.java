@@ -36,7 +36,7 @@ public class Task8Test {
         "000000000",
     })
     public void testThatIsMultipleOf3ZerosReturnedTrue(String input) {
-        assertThat(Task8.IsMultipleOf3Zeros(input)).isTrue();
+        assertThat(Task8.isMultipleOf3Zeros(input)).isTrue();
     }
 
     @ParameterizedTest
@@ -47,7 +47,7 @@ public class Task8Test {
         "010000"
     })
     public void testThatIsMultipleOf3ZerosReturnedFalse(String input) {
-        assertThat(Task8.IsMultipleOf3Zeros(input)).isFalse();
+        assertThat(Task8.isMultipleOf3Zeros(input)).isFalse();
     }
 
     @ParameterizedTest
@@ -60,7 +60,7 @@ public class Task8Test {
         "00010"
     })
     public void testThatIsNot11Or111ReturnedTrue(String input) {
-        assertThat(Task8.IsNot11Or111(input)).isTrue();
+        assertThat(Task8.isNot11Or111(input)).isTrue();
     }
 
     @ParameterizedTest
@@ -72,7 +72,7 @@ public class Task8Test {
         "1110111"
     })
     public void testThatIsNot11Or111ReturnedFalse(String input) {
-        assertThat(Task8.IsNot11Or111(input)).isFalse();
+        assertThat(Task8.isNot11Or111(input)).isFalse();
     }
 
     @ParameterizedTest
@@ -83,7 +83,7 @@ public class Task8Test {
         "10101"
     })
     public void testThatIsOddPositionIs1ReturnedTrue(String input) {
-        assertThat(Task8.IsOddPositionIs1(input)).isTrue();
+        assertThat(Task8.isOddPositionIs1(input)).isTrue();
     }
 
     @ParameterizedTest
@@ -95,6 +95,6 @@ public class Task8Test {
         "000000"
     })
     public void testThatIsOddPositionIs1ReturnedFalse(String input) {
-        assertThat(Task8.IsOddPositionIs1(input)).isFalse();
+        assertThat(Task8.isOddPositionIs1(input)).isFalse();
     }
 }
