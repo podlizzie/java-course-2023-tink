@@ -21,13 +21,13 @@ public class Task1 {
      * @throws IllegalArgumentException if the input array is empty or contains incorrect entries.
      */
     public static Duration calculateSessionTime(String @NotNull [] input) {
+        if (input.length == 0) {
+            throw new IllegalArgumentException("Input array is empty");
+        }
         for (String line : input) {
             if (!isValidInput(line)) {
                 throw new IllegalArgumentException("Illegal line");
             }
-        }
-        if (input.length == 0) {
-            throw new IllegalArgumentException("Input array is empty");
         }
 
         long totalSeconds = 0;

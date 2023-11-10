@@ -8,7 +8,7 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class Task2 {
-    private static final int DAY13 = 13;
+    private static final int DAY_13 = 13;
 
     private Task2() {
 
@@ -47,7 +47,7 @@ public class Task2 {
      * @return a LocalDate representing the next Friday 13 after the given date.
      */
     public static LocalDate findNextFridayOf13(@NotNull LocalDate date) {
-        return date.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).withDayOfMonth(DAY13);
+        return date.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).withDayOfMonth(DAY_13);
     }
 }
 
