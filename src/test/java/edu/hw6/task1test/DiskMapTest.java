@@ -8,7 +8,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class DiskMapTest {
 
-    private static final String TEST_FILE_PATH = "testFile.txt";
+    private static final String TEST_FILE_PATH = "src/test/java/edu/hw6/task1test/testFile.txt";
     DiskMap diskMap = new DiskMap(TEST_FILE_PATH);
 
     @Test
