@@ -10,6 +10,12 @@ public class FileCloner {
 
     }
 
+    /**
+     * Clones the specified file by creating a copy with a unique name in the same directory.
+     *
+     * @param path The path to the file to be cloned.
+     * @throws IOException if an I/O error occurs when creating the file copy.
+     */
     public static void cloneFile(@NotNull Path path) throws IOException {
         String fileName = path.getFileName().toString();
         String baseName = fileName.substring(0, fileName.lastIndexOf("."));

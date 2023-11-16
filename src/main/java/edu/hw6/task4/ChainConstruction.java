@@ -20,6 +20,12 @@ public class ChainConstruction {
 
     }
 
+    /**
+     * Writes the specified text to the file at the given path.
+     *
+     * @param filePath The path to the file to write the text to.
+     * @param text     The text to be written to the file.
+     */
     public static void writeTextToFile(String filePath, String text) {
         try (OutputStream fileOutputStream = Files.newOutputStream(Paths.get(filePath));
              OutputStream checkedOutputStream = new CheckedOutputStream(fileOutputStream, new CRC32());
