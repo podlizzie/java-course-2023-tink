@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -17,6 +15,7 @@ public class Main {
     private static OffsetDateTime to;
     private static String outputFormat;
 
+    //java -jar nginx-log-stats.jar --path src/main/java/edu/project3/logs --from 2023-08-31 --format markdown
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -24,8 +23,7 @@ public class Main {
 
         parseInput(inputArgs);
         LogReader logReader = new LogReader();
-        System.out.println(logReader.readLogs(logPath,null,null).collect(Collectors.toList()));
-        System.out.println(from);
+        System.out.println(logReader.readLogs(logPath, from, to).collect(Collectors.toList()));
     }
 
     public static void parseInput(String[] args) {
