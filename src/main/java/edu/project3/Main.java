@@ -1,9 +1,11 @@
 package edu.project3;
 
+import edu.project3.reports.LogReport;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -23,12 +25,15 @@ public class Main {
 
         parseInput(inputArgs);
         LogReader logReader = new LogReader();
-        System.out.println(logReader.readLogs(logPath, from, to).collect(Collectors.toList()));
+        List<LogRecord> logs = logReader.readLogs(logPath, from, to).collect(Collectors.toList());
+
+        LogReport logReport = new LogReport();
+        System.out.println(logReport.generateReport(logs, logPath, from, to, outputFormat));
     }
 
     public static void parseInput(String[] args) {
         if (args.length < 5) {
-            throw new IllegalArgumentException("Необходимо указать путь к NGINX лог-файлам");
+            throw new IllegalArgumentException("Must specify log file path");
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -52,22 +57,6 @@ public class Main {
                 i++;
             }
         }
-    }
-
-    public String getLogPath() {
-        return logPath;
-    }
-
-    public OffsetDateTime getFrom() {
-        return from;
-    }
-
-    public OffsetDateTime getTo() {
-        return to;
-    }
-
-    public String getOutputFormat() {
-        return outputFormat;
     }
 
 }
