@@ -44,6 +44,7 @@ public class MarkdownGenerator {
             + LogReportUtils.generateStatusCodesTable(logRecords, FORMAT) + "\n\n";
     }
 
+    @SuppressWarnings("MultipleStringLiterals")
     public static String generateAddrTable(List<LogRecord> logRecords) {
         return "#### IP Address Table\n\n"
             + "| IP              | Count        |\n"
