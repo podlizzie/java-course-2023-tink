@@ -24,6 +24,7 @@ public class LogReader {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
 
+    @SuppressWarnings("MagicNumber")
     public Stream<LogRecord> readLogs(@NotNull String logPath, OffsetDateTime from, OffsetDateTime to) {
         try {
             Stream<String> logLines = null;
