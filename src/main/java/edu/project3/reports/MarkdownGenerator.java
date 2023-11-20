@@ -40,6 +40,14 @@ public class MarkdownGenerator {
         return "#### Status Codes Table\n\n"
             + "| Status Code           | Description | Count       |\n"
             + "|:---------------------:|------------:|-----------:|\n"
-            + LogReportUtils.generateStatusCodesTable(logRecords, FORMAT);
+            + LogReportUtils.generateStatusCodesTable(logRecords, FORMAT) + "\n\n";
     }
+
+    public static String generateAddrTable(List<LogRecord> logRecords) {
+        return "#### IP Address Table\n\n"
+            + "| IP              | Count        |\n"
+            + "|:---------------:|-------------:|\n"
+            + LogReportUtils.generateIpAddressesTable(logRecords, FORMAT);
+    }
+
 }

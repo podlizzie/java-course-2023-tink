@@ -55,4 +55,19 @@ public class LogReportUtils {
             })
             .collect(Collectors.joining("\n"));
     }
+
+    public static String generateIpAddressesTable(List<LogRecord> logRecords, String format) {
+        Map<String, Long> ipAddressCounts = logRecords.stream()
+            .collect(Collectors.groupingBy(LogRecord::getRemoteAddr, Collectors.counting()));
+
+        return ipAddressCounts.entrySet().stream()
+            .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+            .map(entry -> {
+                String count = entry.getValue().toString();
+                return format.equals(FORMAT_MD)
+                    ? "|" + entry.getKey() + "|" + count + "|"
+                    : "|" + entry.getKey() + "|" + count;
+            })
+            .collect(Collectors.joining("\n"));
+    }
 }

@@ -15,7 +15,6 @@ public class LogReport {
     private static final String FORMAT_MD = "markdown";
     private static final String FORMAT_ADOC = "adoc";
 
-
     private LogReport() {
 
     }
@@ -43,11 +42,13 @@ public class LogReport {
             return
                 MarkdownGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSuze)
                     + MarkdownGenerator.generateResourceTable(logRecords)
-                    + MarkdownGenerator.generateStatusCodesTable(logRecords);
+                    + MarkdownGenerator.generateStatusCodesTable(logRecords)
+                    + MarkdownGenerator.generateAddrTable(logRecords);
         } else if (outputFormat.equals(FORMAT_ADOC)) {
             return AdocGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSuze)
                 + AdocGenerator.generateResourceTable(logRecords)
-                + AdocGenerator.generateStatusCodesTable(logRecords);
+                + AdocGenerator.generateStatusCodesTable(logRecords)
+                + AdocGenerator.generateAddrTable(logRecords);
         } else {
             throw new IllegalArgumentException("Unsupported output format: " + outputFormat);
         }

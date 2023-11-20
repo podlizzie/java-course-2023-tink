@@ -19,12 +19,13 @@ public class LogRecord {
     private int status;
     private long bodyBytesSent;
     private String resource;
+    private String remoteAddr;
 
     @SuppressWarnings("MagicNumber")
     public void logParser(String log) {
         Matcher matcher = LOG_PATTERN.matcher(log);
         if (matcher.matches()) {
-            String remoteAddr = matcher.group(1);
+            remoteAddr = matcher.group(1);
             String remoteUser = matcher.group(2);
             timestamp = OffsetDateTime.parse(matcher.group(3), DATE_TIME_FORMATTER);
             String request = matcher.group(4);
@@ -53,5 +54,9 @@ public class LogRecord {
 
     public OffsetDateTime getTimestamp() {
         return timestamp;
+    }
+
+    public String getRemoteAddr() {
+        return remoteAddr;
     }
 }

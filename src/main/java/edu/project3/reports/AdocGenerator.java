@@ -37,6 +37,12 @@ public class AdocGenerator {
     public static String generateStatusCodesTable(List<LogRecord> logRecords) {
         return "==== Status Codes Table\n" + "|===\n"
             + "|Status Code|Description|Count\n"
-            + LogReportUtils.generateStatusCodesTable(logRecords, FORMAT) + "\n|===";
+            + LogReportUtils.generateStatusCodesTable(logRecords, FORMAT) + "\n|===\n\n";
+    }
+
+    public static String generateAddrTable(List<LogRecord> logRecords) {
+        return "==== IP Address Table\n" + "|===\n"
+            + "|IP|Count\n"
+            + LogReportUtils.generateIpAddressesTable(logRecords, FORMAT) + "\n|===";
     }
 }
