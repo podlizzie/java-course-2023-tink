@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LogReaderTest {
     private static final String DIR_PATH = "src/test/java/edu/project3/logs/test2*";
@@ -63,8 +64,27 @@ class LogReaderTest {
     void testThatGivenNestedLogPathReturnedCorrectlyLenghtOfLogLines() {
         List<LogRecord> logs = logReader.readLogs("src/test/java/edu/project3/logs/**/2023-08-31.txt",
             null, null
-        ).collect(Collectors.toList());
+        ).toList();
 
         assertThat(logs).hasSize(7);
+    }
+
+    @Test
+    void testThatGivenLogPathWithoutLogsReturnedEmpty() {
+        String invalidLogPath = "invalid/path/to/logs";
+
+        List<LogRecord> logs = logReader.readLogs(invalidLogPath, null, null).toList();
+
+        assertThat(logs).isEmpty();
+    }
+
+    @Test
+    void givenErrorInHttpRequest_whenReadLogs_thenEmptyStreamReturned() {
+        String errorUrl = "http://example.com/error";
+
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> logReader.readLogs(errorUrl, null, null).collect(Collectors.toList())
+        );
     }
 }
