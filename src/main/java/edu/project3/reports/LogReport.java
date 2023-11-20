@@ -56,7 +56,7 @@ public class LogReport {
         }
     }
 
-    private static void writeReportToFile(String report, String outputFormat) {
+    public static void writeReportToFile(String report, String outputFormat) {
         String format = "";
         if (outputFormat.equals(FORMAT_MD)) {
             format = "md";
