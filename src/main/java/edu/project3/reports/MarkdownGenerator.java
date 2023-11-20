@@ -29,6 +29,7 @@ public class MarkdownGenerator {
             + "| Average Response Size | " + averageResponseSize + " b|\n\n";
     }
 
+    @SuppressWarnings("MultipleStringLiterals")
     public static String generateResourceTable(List<LogRecord> logRecords) {
         return "#### Resource Table\n\n"
             + "| Resource              | Count        |\n"
