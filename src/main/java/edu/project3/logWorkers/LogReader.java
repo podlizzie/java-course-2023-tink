@@ -34,7 +34,8 @@ public class LogReader {
                 if (logPath.contains("**")) {
                     int index = logPath.indexOf("**");
                     File folder = new File(logPath.substring(0, index));
-                    File[] files = listFilesForFolder(folder);
+                    String fileName = logPath.substring(index + 3);
+                    File[] files = listFilesForFolder(folder, fileName);
                     logLines = Arrays.stream(files)
                         .filter(File::isFile)
                         .map(File::toPath)
@@ -90,13 +91,15 @@ public class LogReader {
         return HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    private File[] listFilesForFolder(File folder) {
+    private File[] listFilesForFolder(File folder, String fileName) {
         List<File> fileList = new ArrayList<>();
         for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
             if (fileEntry.isDirectory()) {
-                fileList.addAll(Arrays.asList(listFilesForFolder(fileEntry)));
+                fileList.addAll(Arrays.asList(listFilesForFolder(fileEntry, fileName)));
             } else {
-                fileList.add(fileEntry);
+                if (fileEntry.getName().equals(fileName)) {
+                    fileList.add(fileEntry);
+                }
             }
         }
         return fileList.toArray(new File[fileList.size()]);
