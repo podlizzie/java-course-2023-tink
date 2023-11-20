@@ -1,5 +1,7 @@
 package edu.project3;
 
+import edu.project3.logWorkers.LogReader;
+import edu.project3.logWorkers.LogRecord;
 import edu.project3.reports.LogReport;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;

@@ -1,6 +1,6 @@
 package edu.project3.reports;
 
-import edu.project3.LogRecord;
+import edu.project3.logWorkers.LogRecord;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

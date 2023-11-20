@@ -1,6 +1,6 @@
 package edu.project3.reports;
 
-import edu.project3.LogRecord;
+import edu.project3.logWorkers.LogRecord;
 import java.time.OffsetDateTime;
 import java.util.List;
 

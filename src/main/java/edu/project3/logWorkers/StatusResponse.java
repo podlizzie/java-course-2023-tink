@@ -1,4 +1,4 @@
-package edu.project3;
+package edu.project3.logWorkers;
 
 public enum StatusResponse {
     OK(200, "OK"),
@@ -32,7 +32,7 @@ public enum StatusResponse {
 
     private final int value;
 
-    private StatusResponse(int value, String description) {
+    StatusResponse(int value, String description) {
         this.value = value;
     }
 

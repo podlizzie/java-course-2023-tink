@@ -1,7 +1,7 @@
 package edu.project3.reports;
 
-import edu.project3.LogRecord;
-import edu.project3.StatusResponse;
+import edu.project3.logWorkers.LogRecord;
+import edu.project3.logWorkers.StatusResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
