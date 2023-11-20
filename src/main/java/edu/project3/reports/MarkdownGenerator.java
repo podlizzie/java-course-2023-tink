@@ -54,7 +54,7 @@ public class MarkdownGenerator {
 
     public static String generateRequestTable(List<LogRecord> logRecords) {
         return "#### Requests Table\n\n"
-            + "| IP              | Count        |\n"
+            + "| Request         | Count        |\n"
             + "|:---------------:|-------------:|\n"
             + LogReportUtils.generateRequestTable(logRecords, FORMAT);
     }
