@@ -44,6 +44,9 @@ public class ParseInput {
                 i++;
             }
         }
+        if (outputFormat == null) {
+            outputFormat = "markdown";
+        }
     }
 
     public static String getLogPath() {
