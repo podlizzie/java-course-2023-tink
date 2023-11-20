@@ -17,8 +17,8 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 public class LogReader {
-    private final static Logger LOGGER = LogManager.getLogger();
-    private final HttpClient httpClient = HttpClient.newHttpClient();
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final HttpClient httpClient = HttpClient.newHttpClient();
 
     public Stream<LogRecord> readLogs(@NotNull String logPath, OffsetDateTime from, OffsetDateTime to) {
         try {
@@ -63,7 +63,7 @@ public class LogReader {
         return logRecord;
     }
 
-    private HttpResponse<String> sendHttpRequest(String url)
+    private static HttpResponse<String> sendHttpRequest(String url)
         throws URISyntaxException, IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(new URI(url))
