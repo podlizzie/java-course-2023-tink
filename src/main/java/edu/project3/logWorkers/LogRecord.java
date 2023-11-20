@@ -20,6 +20,7 @@ public class LogRecord {
     private long bodyBytesSent;
     private String resource;
     private String remoteAddr;
+    private String request;
 
     @SuppressWarnings("MagicNumber")
     public void logParser(String log) {
@@ -28,7 +29,7 @@ public class LogRecord {
             remoteAddr = matcher.group(1);
             String remoteUser = matcher.group(2);
             timestamp = OffsetDateTime.parse(matcher.group(3), DATE_TIME_FORMATTER);
-            String request = matcher.group(4);
+            request = matcher.group(4);
             resource = matcher.group(5);
             status = Integer.parseInt(matcher.group(6));
             String statusResponse = String.valueOf(StatusResponse.getByValue(status));
@@ -58,5 +59,9 @@ public class LogRecord {
 
     public String getRemoteAddr() {
         return remoteAddr;
+    }
+
+    public String getRequest() {
+        return request;
     }
 }

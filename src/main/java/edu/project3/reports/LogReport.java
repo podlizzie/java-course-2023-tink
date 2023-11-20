@@ -43,12 +43,14 @@ public class LogReport {
                 MarkdownGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSuze)
                     + MarkdownGenerator.generateResourceTable(logRecords)
                     + MarkdownGenerator.generateStatusCodesTable(logRecords)
-                    + MarkdownGenerator.generateAddrTable(logRecords);
+                    + MarkdownGenerator.generateAddrTable(logRecords)
+                    + MarkdownGenerator.generateRequestTable(logRecords);
         } else if (outputFormat.equals(FORMAT_ADOC)) {
             return AdocGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSuze)
                 + AdocGenerator.generateResourceTable(logRecords)
                 + AdocGenerator.generateStatusCodesTable(logRecords)
-                + AdocGenerator.generateAddrTable(logRecords);
+                + AdocGenerator.generateAddrTable(logRecords)
+                + AdocGenerator.generateRequestTable(logRecords);
         } else {
             throw new IllegalArgumentException("Unsupported output format: " + outputFormat);
         }

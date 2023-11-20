@@ -44,6 +44,12 @@ public class AdocGenerator {
     public static String generateAddrTable(List<LogRecord> logRecords) {
         return "==== IP Address Table\n" + "|===\n"
             + "|IP|Count\n"
-            + LogReportUtils.generateIpAddressesTable(logRecords, FORMAT) + "\n|===";
+            + LogReportUtils.generateTopIpAddressesTable(logRecords, FORMAT) + "\n|===\n\n";
+    }
+
+    public static String generateRequestTable(List<LogRecord> logRecords) {
+        return "==== Requests Table\n" + "|===\n"
+            + "|Request|Count\n"
+            + LogReportUtils.generateRequestTable(logRecords, FORMAT) + "\n|===";
     }
 }

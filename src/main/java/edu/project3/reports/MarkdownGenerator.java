@@ -48,7 +48,14 @@ public class MarkdownGenerator {
         return "#### IP Address Table\n\n"
             + "| IP              | Count        |\n"
             + "|:---------------:|-------------:|\n"
-            + LogReportUtils.generateIpAddressesTable(logRecords, FORMAT);
+            + LogReportUtils.generateTopIpAddressesTable(logRecords, FORMAT) + "\n\n";
+    }
+
+    public static String generateRequestTable(List<LogRecord> logRecords) {
+        return "#### Requests Table\n\n"
+            + "| IP              | Count        |\n"
+            + "|:---------------:|-------------:|\n"
+            + LogReportUtils.generateRequestTable(logRecords, FORMAT);
     }
 
 }
