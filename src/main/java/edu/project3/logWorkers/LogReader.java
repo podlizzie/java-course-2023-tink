@@ -1,5 +1,6 @@
 package edu.project3.logWorkers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,7 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,18 +26,31 @@ public class LogReader {
 
     public Stream<LogRecord> readLogs(@NotNull String logPath, OffsetDateTime from, OffsetDateTime to) {
         try {
-            Stream<String> logLines;
+            Stream<String> logLines = null;
             if (logPath.startsWith("https://") || logPath.startsWith("http://")) {
                 HttpResponse<String> response = sendHttpRequest(logPath);
                 logLines = Arrays.stream(response.body().split("\\r?\\n"));
             } else {
-                Path logsPath = Paths.get(logPath);
-                if (Files.isDirectory(logsPath)) {
-                    logLines = Files.find(logsPath, Integer.MAX_VALUE, (path, basicFileAttributes) ->
-                            basicFileAttributes.isRegularFile())
+                if (logPath.contains("**")) {
+                    int index = logPath.indexOf("**");
+                    File folder = new File(logPath.substring(0, index));
+                    File[] files = listFilesForFolder(folder);
+                    logLines = Arrays.stream(files)
+                        .filter(File::isFile)
+                        .map(File::toPath)
                         .flatMap(this::readLines);
 
+                } else if (logPath.contains("*")) {
+                    File folder = new File(logPath.replace("*", ""));
+                    File[] files = folder.listFiles();
+                    if (files != null) {
+                        logLines = Arrays.stream(files)
+                            .filter(File::isFile)
+                            .map(File::toPath)
+                            .flatMap(this::readLines);
+                    }
                 } else {
+                    Path logsPath = Paths.get(logPath);
                     logLines = Files.lines(logsPath);
                 }
             }
@@ -72,4 +89,17 @@ public class LogReader {
 
         return HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
     }
+
+    private File[] listFilesForFolder(File folder) {
+        List<File> fileList = new ArrayList<>();
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
+            if (fileEntry.isDirectory()) {
+                fileList.addAll(Arrays.asList(listFilesForFolder(fileEntry)));
+            } else {
+                fileList.add(fileEntry);
+            }
+        }
+        return fileList.toArray(new File[fileList.size()]);
+    }
+
 }
