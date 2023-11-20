@@ -44,7 +44,7 @@
 
 #### Requests Table
 
-| IP              | Count        |
+| Request         | Count        |
 |:---------------:|-------------:|
 |GET|51379|
 |HEAD|83|
