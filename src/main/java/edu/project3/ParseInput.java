@@ -25,7 +25,7 @@ public class ParseInput {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        for (int i = 1; i < args.length - 1; i++) {
+        for (int i = 0; i < args.length - 1; i++) {
             if (args[i].equals("--from") && i + 1 < args.length) {
                 from = LocalDate.parse(args[i + 1], formatter)
                     .atStartOfDay(ZoneOffset.UTC)
