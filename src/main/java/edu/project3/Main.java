@@ -17,18 +17,16 @@ public class Main {
     private static OffsetDateTime to;
     private static String outputFormat;
 
-    //java -jar nginx-log-stats.jar --path src/main/java/edu/project3/logs --from 2023-08-31 --format markdown
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         String[] inputArgs = input.split(" ");
-
         parseInput(inputArgs);
+
         LogReader logReader = new LogReader();
         List<LogRecord> logs = logReader.readLogs(logPath, from, to).collect(Collectors.toList());
 
-        LogReport logReport = new LogReport();
-        System.out.println(logReport.generateReport(logs, logPath, from, to, outputFormat));
+        LogReport.generateReportAndWriteToFile(logs, logPath, from, to, outputFormat);
     }
 
     public static void parseInput(String[] args) {
@@ -58,5 +56,4 @@ public class Main {
             }
         }
     }
-
 }
