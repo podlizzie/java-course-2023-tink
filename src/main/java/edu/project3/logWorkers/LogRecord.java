@@ -37,7 +37,7 @@ public class LogRecord {
             String httpReferer = matcher.group(8);
             String httpUserAgent = matcher.group(9);
         } else {
-            LOGGER.info("Error: Invalid log format - Unable to parse the log entry: " + log);
+            throw new IllegalArgumentException("Invalid log format: " + log);
         }
     }
 
