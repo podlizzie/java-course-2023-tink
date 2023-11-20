@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LogReportUtils {
+    private static final String FORMAT_MD = "markdown";
+
     private LogReportUtils() {
 
     }
@@ -30,9 +32,9 @@ public class LogReportUtils {
             .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
             .map(entry -> {
                 String count = entry.getValue().toString();
-                return format.equals("markdown") ?
-                    "|" + entry.getKey() + "|" + count + "|" :
-                    "|" + entry.getKey() + "| " + count;
+                return format.equals(FORMAT_MD)
+                    ? "|" + entry.getKey() + "|" + count + "|"
+                    : "|" + entry.getKey() + "| " + count;
             })
             .collect(Collectors.joining("\n"));
     }
@@ -47,9 +49,9 @@ public class LogReportUtils {
                 String statusCode = entry.getKey().toString();
                 String statusDescription = String.valueOf(StatusResponse.getByValue(entry.getKey()));
                 String count = entry.getValue().toString();
-                return format.equals("markdown") ?
-                    "|" + statusCode + "|" + statusDescription + "|" + count + "|" :
-                    "|" + statusCode + "|" + statusDescription + "|" + count;
+                return format.equals(FORMAT_MD)
+                    ? "|" + statusCode + "|" + statusDescription + "|" + count + "|"
+                    : "|" + statusCode + "|" + statusDescription + "|" + count;
             })
             .collect(Collectors.joining("\n"));
     }

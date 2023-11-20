@@ -20,6 +20,7 @@ public class LogRecord {
     private long bodyBytesSent;
     private String resource;
 
+    @SuppressWarnings("MagicNumber")
     public void logParser(String log) {
         Matcher matcher = LOG_PATTERN.matcher(log);
         if (matcher.matches()) {

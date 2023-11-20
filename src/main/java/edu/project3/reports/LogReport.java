@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 public class LogReport {
     private final static Logger LOGGER = LogManager.getLogger();
     private final static String FOLDER_PATH = "src/main/java/edu/project3/tables_examples";
+    private static final String FORMAT_MD = "markdown";
+    private static final String FORMAT_ADOC = "adoc";
+
 
     private LogReport() {
 
@@ -36,12 +39,12 @@ public class LogReport {
         String outputFormat
     ) {
         String averageResponseSuze = LogReportUtils.computeAverageResponseSize(logRecords);
-        if (outputFormat.equals("markdown")) {
+        if (outputFormat.equals(FORMAT_MD)) {
             return
                 MarkdownGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSuze)
                     + MarkdownGenerator.generateResourceTable(logRecords)
                     + MarkdownGenerator.generateStatusCodesTable(logRecords);
-        } else if (outputFormat.equals("adoc")) {
+        } else if (outputFormat.equals(FORMAT_ADOC)) {
             return AdocGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSuze)
                 + AdocGenerator.generateResourceTable(logRecords)
                 + AdocGenerator.generateStatusCodesTable(logRecords);
@@ -51,11 +54,14 @@ public class LogReport {
     }
 
     private static void writeReportToFile(String report, String outputFormat) {
-        if (outputFormat.equals("markdown")) {
-            outputFormat = "md";
+        String format = "";
+        if (outputFormat.equals(FORMAT_MD)) {
+            format = "md";
+        } else if (outputFormat.equals(FORMAT_ADOC)) {
+            format = FORMAT_ADOC;
         }
 
-        String fileName = "example." + outputFormat;
+        String fileName = "example." + format;
         Path folder = Paths.get(LogReport.FOLDER_PATH);
         Path file = folder.resolve(fileName);
         try {

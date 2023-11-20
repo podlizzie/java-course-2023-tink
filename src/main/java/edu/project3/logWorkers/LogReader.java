@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LogReader {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final HttpClient httpClient = HttpClient.newHttpClient();
+    private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
 
     public Stream<LogRecord> readLogs(@NotNull String logPath, OffsetDateTime from, OffsetDateTime to) {
         try {
@@ -70,6 +70,6 @@ public class LogReader {
             .GET()
             .build();
 
-        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        return HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
     }
 }
