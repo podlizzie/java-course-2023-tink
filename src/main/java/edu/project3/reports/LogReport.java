@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 public class LogReport {
     private final static Logger LOGGER = LogManager.getLogger();
-    private final static String FOLDER_PATH = "src/main/java/edu/project3/tablesExamples";
+    private final static String FOLDER_PATH = "src/main/java/edu/project3/tables_examples";
 
     private LogReport() {
 
