@@ -79,7 +79,7 @@ class LogReaderTest {
     }
 
     @Test
-    void givenErrorInHttpRequest_whenReadLogs_thenEmptyStreamReturned() {
+    void testThatGivenErrorInHttpRequestReturnedException() {
         String errorUrl = "http://example.com/error";
 
         assertThrows(
