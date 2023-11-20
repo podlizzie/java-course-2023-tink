@@ -21,7 +21,7 @@ public class AdocGenerator {
     ) {
         return "==== General Information\n" + "|===\n"
             + "|Metric|Value\n"
-            + "|File|" + logPath + "\n"
+            + "|File(s)|" + logPath + "\n"
             + "|Start Date|" + from + "\n"
             + "|End Date|" + to + "\n"
             + "|Request Count|" + requestCount + "\n"

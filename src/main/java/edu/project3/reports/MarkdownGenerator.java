@@ -22,7 +22,7 @@ public class MarkdownGenerator {
         return "#### General Information\n\n"
             + "| Metric                | Value        |\n"
             + "|:---------------------:|-------------:|\n"
-            + "| File                  | " + logPath + "|\n"
+            + "| File(s)                  | " + logPath + "|\n"
             + "| Start Date            | " + from + "|\n"
             + "| End Date              | " + to + "|\n"
             + "| Request Count         | " + requestCount + "|\n"
