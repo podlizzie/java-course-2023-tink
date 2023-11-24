@@ -14,6 +14,10 @@ public class Task2 {
      * @return the factorial of the number n
      */
     public static int calculateFactorial(int n) {
+        if (n < 0) {
+            return -1;
+        }
+
         return IntStream
             .rangeClosed(1, n)
             .parallel()

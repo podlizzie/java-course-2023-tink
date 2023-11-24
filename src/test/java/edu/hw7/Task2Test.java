@@ -53,5 +53,17 @@ public class Task2Test {
         assertThat(result).isEqualTo(1);
     }
 
+    @Test
+    public void testThatFactorialWithNegativeReturnedNegative1() {
+        // given
+        int number = -10;
+
+        // when
+        int result = Task2.calculateFactorial(number);
+
+        // then
+        assertThat(result).isEqualTo(-1);
+    }
+
 }
 
