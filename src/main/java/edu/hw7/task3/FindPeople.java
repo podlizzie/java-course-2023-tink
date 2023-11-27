@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
-import org.jetbrains.annotations.NotNull;
 
 public class FindPeople implements PersonDatabase {
     private static final String ERROR_MSG = "Person data not complete.";
@@ -40,7 +39,7 @@ public class FindPeople implements PersonDatabase {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.name().equals(name))
+                .filter(person -> person.name().equals(name) && validatePersonAttributes(person))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
@@ -52,7 +51,7 @@ public class FindPeople implements PersonDatabase {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.address().equals(address))
+                .filter(person -> person.address().equals(address) && validatePersonAttributes(person))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
@@ -64,14 +63,14 @@ public class FindPeople implements PersonDatabase {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.phoneNumber().equals(phone))
+                .filter(person -> person.phoneNumber().equals(phone) && validatePersonAttributes(person))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
         }
     }
 
-    private Boolean validatePersonAttributes(@NotNull Person person) throws InvalidPersonDataException {
+    private Boolean validatePersonAttributes(Person person) throws InvalidPersonDataException {
         if (person.name() == null || person.phoneNumber() == null || person.address() == null) {
             throw new InvalidPersonDataException(ERROR_MSG);
         }
