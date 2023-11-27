@@ -12,7 +12,7 @@ public class Task1 {
     private final static Logger LOGGER = LogManager.getLogger();
     private final static String ERROR_MSG = "Error while join threads %s";
     private static final int INITIAL_VALUE = 0;
-    private static final AtomicInteger count = new AtomicInteger(INITIAL_VALUE);
+    private static AtomicInteger count = new AtomicInteger(INITIAL_VALUE);
 
     public static int getCount() {
         return count.get();
