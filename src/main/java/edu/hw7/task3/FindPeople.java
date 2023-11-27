@@ -40,7 +40,7 @@ public class FindPeople implements PersonDatabase {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.name().equals(name) && validatePersonAttributes(person))
+                .filter(person -> person.name().equals(name))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
@@ -52,7 +52,7 @@ public class FindPeople implements PersonDatabase {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.address().equals(address) && validatePersonAttributes(person))
+                .filter(person -> person.address().equals(address))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
@@ -64,7 +64,7 @@ public class FindPeople implements PersonDatabase {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.phoneNumber().equals(phone) && validatePersonAttributes(person))
+                .filter(person -> person.phoneNumber().equals(phone))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
