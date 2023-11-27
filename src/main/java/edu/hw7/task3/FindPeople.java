@@ -8,22 +8,25 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
 import org.jetbrains.annotations.NotNull;
 
-public class PersonCache implements PersonDatabase {
+public class FindPeople implements PersonDatabase {
+    private static final String ERROR_MSG = "Person data not complete.";
     private final Map<Integer, Person> database = new HashMap<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
     @Override
-    public void add(Person person) {
+    public synchronized void add(Person person) {
         lock.writeLock().lock();
         try {
-            database.put(person.id(), person);
+            if (validatePersonAttributes(person)) {
+                database.put(person.id(), person);
+            }
         } finally {
             lock.writeLock().unlock();
         }
     }
 
     @Override
-    public void delete(int id) {
+    public synchronized void delete(int id) {
         lock.writeLock().lock();
         try {
             database.remove(id);
@@ -33,11 +36,11 @@ public class PersonCache implements PersonDatabase {
     }
 
     @Override
-    public List<Person> findByName(String name) {
+    public synchronized List<Person> findByName(String name) {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.name().equals(name) && isAttributesNotNull(person))
+                .filter(person -> person.name().equals(name) && validatePersonAttributes(person))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
@@ -45,11 +48,11 @@ public class PersonCache implements PersonDatabase {
     }
 
     @Override
-    public List<Person> findByAddress(String address) {
+    public synchronized List<Person> findByAddress(String address) {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.address().equals(address) && isAttributesNotNull(person))
+                .filter(person -> person.address().equals(address) && validatePersonAttributes(person))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
@@ -57,20 +60,21 @@ public class PersonCache implements PersonDatabase {
     }
 
     @Override
-    public List<Person> findByPhone(String phone) {
+    public synchronized List<Person> findByPhone(String phone) {
         lock.readLock().lock();
         try {
             return database.values().stream()
-                .filter(person -> person.phoneNumber().equals(phone) && isAttributesNotNull(person))
+                .filter(person -> person.phoneNumber().equals(phone) && validatePersonAttributes(person))
                 .collect(Collectors.toList());
         } finally {
             lock.readLock().unlock();
         }
     }
 
-    private boolean isAttributesNotNull(@NotNull Person person) {
-        return person.name() != null
-            && person.phoneNumber() != null
-            && person.address() != null;
+    private Boolean validatePersonAttributes(@NotNull Person person) throws InvalidPersonDataException {
+        if (person.name() == null || person.phoneNumber() == null || person.address() == null) {
+            throw new InvalidPersonDataException(ERROR_MSG);
+        }
+        return true;
     }
 }
