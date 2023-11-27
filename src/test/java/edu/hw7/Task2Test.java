@@ -11,7 +11,7 @@ public class Task2Test {
         int number = 5;
 
         // when
-        int result = Task2.calculateFactorial(number);
+        long result = Task2.calculateFactorial(number);
 
         // then
         assertThat(result).isEqualTo(120);
@@ -23,7 +23,7 @@ public class Task2Test {
         int number = 10;
 
         // when
-        int result = Task2.calculateFactorial(number);
+        long result = Task2.calculateFactorial(number);
 
         // then
         assertThat(result).isEqualTo(3628800);
@@ -35,7 +35,7 @@ public class Task2Test {
         int number = 1;
 
         // when
-        int result = Task2.calculateFactorial(number);
+        long result = Task2.calculateFactorial(number);
 
         // then
         assertThat(result).isEqualTo(1);
@@ -47,7 +47,7 @@ public class Task2Test {
         int number = 0;
 
         // when
-        int result = Task2.calculateFactorial(number);
+        long result = Task2.calculateFactorial(number);
 
         // then
         assertThat(result).isEqualTo(1);
@@ -59,7 +59,7 @@ public class Task2Test {
         int number = -10;
 
         // when
-        int result = Task2.calculateFactorial(number);
+        long result = Task2.calculateFactorial(number);
 
         // then
         assertThat(result).isEqualTo(-1);
