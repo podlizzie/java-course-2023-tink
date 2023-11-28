@@ -1,16 +1,16 @@
 #### General Information
 
-| Metric                | Value        |
+|Metric|Value|
 |:---------------------:|-------------:|
-| File(s)                  | https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs|
-| Start Date            | null|
-| End Date              | null|
-| Request Count         | 51462|
-| Average Response Size | 659509 b|
+|File(s)|https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs|
+|Start Date|null|
+|End Date|null|
+|Request Count|51462|
+|Average Response Size|659509 b|
 
 #### Resource Table
 
-| Resource              | Count        |
+|Resource|Count|
 |:---------------------:|-------------:|
 |/downloads/product_1|30285|
 |/downloads/product_2|21104|
@@ -18,7 +18,7 @@
 
 #### Status Codes Table
 
-| Status Code           | Description | Count       |
+|Status Code|Description|Count|
 |:---------------------:|------------:|-----------:|
 |404|NOT_FOUND|33876|
 |304|NOT_MODIFIED|13330|
@@ -29,8 +29,8 @@
 
 #### IP Address Table
 
-| IP              | Count        |
-|:---------------:|-------------:|
+|IP|Count|
+|:---------------------:|-------------:|
 |216.46.173.126|2350|
 |180.179.174.219|1720|
 |204.77.168.241|1439|
@@ -44,7 +44,8 @@
 
 #### Requests Table
 
-| Request         | Count        |
-|:---------------:|-------------:|
+|Request|Count|
+|:---------------------:|-------------:|
 |GET|51379|
 |HEAD|83|
+
