@@ -10,7 +10,6 @@ public class Task1 {
     }
 
     private final static Logger LOGGER = LogManager.getLogger();
-    private final static String ERROR_MSG = "Error while join threads %s";
     private static final int INITIAL_VALUE = 0;
     private static AtomicInteger count = new AtomicInteger(INITIAL_VALUE);
 
@@ -38,7 +37,7 @@ public class Task1 {
             thread1.join();
             thread2.join();
         } catch (InterruptedException e) {
-            LOGGER.info(String.format(ERROR_MSG, e.getMessage()));
+            LOGGER.error("Error while join threads {}", e.getMessage(), e);
         }
     }
 }
