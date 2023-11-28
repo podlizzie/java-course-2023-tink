@@ -14,7 +14,7 @@ public class LogReportTest {
         String reportContent = "example report content";
         String outputFormat = "adoc";
         String fileName = "example.adoc";
-        String folderPath = "src/main/java/edu/project3/tablesExamples";
+        String folderPath = "src/main/resources/tablesExamples";
 
         Path folder = Paths.get(folderPath);
         Path file = folder.resolve(fileName);
@@ -33,7 +33,7 @@ public class LogReportTest {
         String reportContent = "example report content";
         String outputFormat = "markdown";
         String fileName = "example.md";
-        String folderPath = "src/main/java/edu/project3/tablesExamples";
+        String folderPath = "src/main/resources/tablesExamples";
 
         Path folder = Paths.get(folderPath);
         Path file = folder.resolve(fileName);
