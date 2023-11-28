@@ -17,13 +17,13 @@ public class MarkdownGeneratorTest {
         assertThat(generalInformation).isEqualTo("""
             #### General Information
 
-            | Metric                | Value        |
+            |Metric|Value|
             |:---------------------:|-------------:|
-            | File(s)                  | logPath|
-            | Start Date            | null|
-            | End Date              | null|
-            | Request Count         | 100|
-            | Average Response Size | 1234 b|
+            |File(s)|logPath|
+            |Start Date|null|
+            |End Date|null|
+            |Request Count|100|
+            |Average Response Size|1234 b|
 
             """);
     }
@@ -34,7 +34,7 @@ public class MarkdownGeneratorTest {
         assertThat(resourceTable).isEqualTo("""
             #### Resource Table
 
-            | Resource              | Count        |
+            |Resource|Count|
             |:---------------------:|-------------:|
             |/downloads/product_1|2|
 
@@ -47,7 +47,7 @@ public class MarkdownGeneratorTest {
         assertThat(statusCodesTable).isEqualTo("""
             #### Status Codes Table
 
-            | Status Code           | Description | Count       |
+            |Status Code|Description|Count|
             |:---------------------:|------------:|-----------:|
             |304|NOT_MODIFIED|1|
             |200|OK|1|
@@ -61,8 +61,8 @@ public class MarkdownGeneratorTest {
         assertThat(addrTable).isEqualTo("""
             #### IP Address Table
 
-            | IP              | Count        |
-            |:---------------:|-------------:|
+            |IP|Count|
+            |:---------------------:|-------------:|
             |93.180.71.3|1|
             |93.180.71.4|1|
 
@@ -75,9 +75,11 @@ public class MarkdownGeneratorTest {
         assertThat(requestTable).isEqualTo("""
             #### Requests Table
 
-            | Request         | Count        |
-            |:---------------:|-------------:|
-            |GET|2|""");
+            |Request|Count|
+            |:---------------------:|-------------:|
+            |GET|2|
+
+            """);
     }
 
     private static @NotNull List<LogRecord> createSampleLogRecords() {

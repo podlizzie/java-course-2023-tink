@@ -50,7 +50,7 @@ public class AdocGenerator {
 
         stringBuilder.append(SECTION_HEADER_START).append("Resource Table")
             .append(SECTION_HEADER_END)
-            .append(TABLE_COLUMN_SEPARATOR).append("Resourse")
+            .append(TABLE_COLUMN_SEPARATOR).append("Resource")
             .append(TABLE_COLUMN_SEPARATOR).append(COUNT_ROW).append(TABLE_ROW_SEPARATOR)
             .append(LogReportUtils.generateResourceTable(logRecords, FORMAT)).append(TABLE_ROW_SEPARATOR)
             .append(SECTION_HEADER_END);

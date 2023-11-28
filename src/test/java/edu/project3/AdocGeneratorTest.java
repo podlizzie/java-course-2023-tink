@@ -23,8 +23,8 @@ public class AdocGeneratorTest {
             |End Date|null
             |Request Count|100
             |Average Response Size|1234 b
-            |===
 
+            |===
             """);
     }
 
@@ -36,8 +36,8 @@ public class AdocGeneratorTest {
             |===
             |Resource|Count
             |/downloads/product_1| 2
-            |===
 
+            |===
             """);
     }
 
@@ -50,8 +50,8 @@ public class AdocGeneratorTest {
             |Status Code|Description|Count
             |304|NOT_MODIFIED|1
             |200|OK|1
-            |===
 
+            |===
             """);
     }
 
@@ -64,8 +64,8 @@ public class AdocGeneratorTest {
             |IP|Count
             |93.180.71.3|1
             |93.180.71.4|1
-            |===
 
+            |===
             """);
     }
 
@@ -77,7 +77,9 @@ public class AdocGeneratorTest {
             |===
             |Request|Count
             |GET|2
-            |===""");
+
+            |===
+            """);
     }
 
     private static @NotNull List<LogRecord> createSampleLogRecords() {
