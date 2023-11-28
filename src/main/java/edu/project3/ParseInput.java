@@ -12,29 +12,26 @@ public class ParseInput {
     private static OffsetDateTime to;
     private static String outputFormat;
     private static final int MIN_INPUT_LENGHT = 5;
+    private static final String ERROR_MSG = "Must specify log file path";
 
     private ParseInput() {
 
     }
 
-    @SuppressWarnings({"MagicNumber", "ModifiedControlVariable"})
+    @SuppressWarnings("ModifiedControlVariable")
     public static void parseInput(String[] args) {
         if (args.length < MIN_INPUT_LENGHT) {
-            throw new IllegalArgumentException("Must specify log file path");
+            throw new IllegalArgumentException(ERROR_MSG);
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (int i = 0; i < args.length - 1; i++) {
             if (args[i].equals("--from") && i + 1 < args.length) {
-                from = LocalDate.parse(args[i + 1], formatter)
-                    .atStartOfDay(ZoneOffset.UTC)
-                    .toOffsetDateTime();
+                parseFrom(args, i, formatter);
                 i++;
             } else if (args[i].equals("--to") && i + 1 < args.length) {
-                to = LocalDate.parse(args[i + 1], formatter)
-                    .atTime(23, 59, 59)
-                    .atOffset(ZoneOffset.UTC);
+                parseTo(args, i, formatter);
                 i++;
             } else if (args[i].equals("--format") && i + 1 < args.length) {
                 outputFormat = args[i + 1];
@@ -45,8 +42,21 @@ public class ParseInput {
             }
         }
         if (outputFormat == null) {
-            outputFormat = "markdown";
+            outputFormat = "markdown"; //default
         }
+    }
+
+    private static void parseFrom(String[] args, int index, DateTimeFormatter formatter) {
+        from = LocalDate.parse(args[index + 1], formatter)
+            .atStartOfDay(ZoneOffset.UTC)
+            .toOffsetDateTime();
+    }
+
+    @SuppressWarnings("MagicNumber")
+    private static void parseTo(String[] args, int index, DateTimeFormatter formatter) {
+        to = LocalDate.parse(args[index + 1], formatter)
+            .atTime(23, 59, 59)
+            .atOffset(ZoneOffset.UTC);
     }
 
     public static String getLogPath() {

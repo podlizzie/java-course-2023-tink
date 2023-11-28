@@ -6,12 +6,16 @@ import java.util.List;
 
 public class AdocGenerator {
     private static final String FORMAT = "adoc";
+    private static final String SECTION_HEADER_START = "==== ";
+    private static final String SECTION_HEADER_END = "\n|===\n";
+    private static final String TABLE_ROW_SEPARATOR = "\n";
+    private static final String TABLE_COLUMN_SEPARATOR = "|";
+    private static final String COUNT_ROW = "Count";
 
     private AdocGenerator() {
 
     }
 
-    @SuppressWarnings("MultipleStringLiterals")
     public static String generateGeneralInformation(
         String logPath,
         OffsetDateTime from,
@@ -19,37 +23,74 @@ public class AdocGenerator {
         int requestCount,
         String averageResponseSize
     ) {
-        return "==== General Information\n" + "|===\n"
-            + "|Metric|Value\n"
-            + "|File(s)|" + logPath + "\n"
-            + "|Start Date|" + from + "\n"
-            + "|End Date|" + to + "\n"
-            + "|Request Count|" + requestCount + "\n"
-            + "|Average Response Size|" + averageResponseSize + " b\n" + "|===\n\n";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(SECTION_HEADER_START).append("General Information")
+            .append(SECTION_HEADER_END)
+            .append(TABLE_COLUMN_SEPARATOR).append("Metric").append(TABLE_COLUMN_SEPARATOR).append("Value")
+            .append(TABLE_ROW_SEPARATOR)
+            .append(TABLE_COLUMN_SEPARATOR).append("File(s)").append(TABLE_COLUMN_SEPARATOR).append(logPath)
+            .append(TABLE_ROW_SEPARATOR)
+            .append(TABLE_COLUMN_SEPARATOR).append("Start Date").append(TABLE_COLUMN_SEPARATOR).append(from)
+            .append(TABLE_ROW_SEPARATOR)
+            .append(TABLE_COLUMN_SEPARATOR).append("End Date").append(TABLE_COLUMN_SEPARATOR).append(to)
+            .append(TABLE_ROW_SEPARATOR)
+            .append(TABLE_COLUMN_SEPARATOR).append("Request Count").append(TABLE_COLUMN_SEPARATOR).append(requestCount)
+            .append(TABLE_ROW_SEPARATOR)
+            .append(TABLE_COLUMN_SEPARATOR).append("Average Response Size").append(TABLE_COLUMN_SEPARATOR)
+            .append(averageResponseSize).append(" b")
+            .append(TABLE_ROW_SEPARATOR)
+            .append(SECTION_HEADER_END);
+
+        return stringBuilder.toString();
     }
 
-    @SuppressWarnings("MultipleStringLiterals")
     public static String generateResourceTable(List<LogRecord> logRecords) {
-        return "==== Resource Table\n" + "|===\n"
-            + "|Resource|Count\n"
-            + LogReportUtils.generateResourceTable(logRecords, FORMAT) + "\n|===\n\n";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(SECTION_HEADER_START).append("Resource Table")
+            .append(SECTION_HEADER_END)
+            .append(TABLE_COLUMN_SEPARATOR).append("Resourse")
+            .append(TABLE_COLUMN_SEPARATOR).append(COUNT_ROW).append(TABLE_ROW_SEPARATOR)
+            .append(LogReportUtils.generateResourceTable(logRecords, FORMAT)).append(TABLE_ROW_SEPARATOR)
+            .append(SECTION_HEADER_END);
+        return stringBuilder.toString();
     }
 
     public static String generateStatusCodesTable(List<LogRecord> logRecords) {
-        return "==== Status Codes Table\n" + "|===\n"
-            + "|Status Code|Description|Count\n"
-            + LogReportUtils.generateStatusCodesTable(logRecords, FORMAT) + "\n|===\n\n";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(SECTION_HEADER_START).append("Status Codes Table")
+            .append(SECTION_HEADER_END)
+            .append(TABLE_COLUMN_SEPARATOR).append("Status Code")
+            .append(TABLE_COLUMN_SEPARATOR).append("Description")
+            .append(TABLE_COLUMN_SEPARATOR).append(COUNT_ROW).append(TABLE_ROW_SEPARATOR)
+            .append(LogReportUtils.generateStatusCodesTable(logRecords, FORMAT)).append(TABLE_ROW_SEPARATOR)
+            .append(SECTION_HEADER_END);
+        return stringBuilder.toString();
     }
 
     public static String generateAddrTable(List<LogRecord> logRecords) {
-        return "==== IP Address Table\n" + "|===\n"
-            + "|IP|Count\n"
-            + LogReportUtils.generateTopIpAddressesTable(logRecords, FORMAT) + "\n|===\n\n";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(SECTION_HEADER_START).append("IP Address Table")
+            .append(SECTION_HEADER_END)
+            .append(TABLE_COLUMN_SEPARATOR).append("IP")
+            .append(TABLE_COLUMN_SEPARATOR).append(COUNT_ROW).append(TABLE_ROW_SEPARATOR)
+            .append(LogReportUtils.generateTopIpAddressesTable(logRecords, FORMAT)).append(TABLE_ROW_SEPARATOR)
+            .append(SECTION_HEADER_END);
+        return stringBuilder.toString();
     }
 
     public static String generateRequestTable(List<LogRecord> logRecords) {
-        return "==== Requests Table\n" + "|===\n"
-            + "|Request|Count\n"
-            + LogReportUtils.generateRequestTable(logRecords, FORMAT) + "\n|===";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(SECTION_HEADER_START).append("Requests Table")
+            .append(SECTION_HEADER_END)
+            .append(TABLE_COLUMN_SEPARATOR).append("Request")
+            .append(TABLE_COLUMN_SEPARATOR).append(COUNT_ROW).append(TABLE_ROW_SEPARATOR)
+            .append(LogReportUtils.generateRequestTable(logRecords, FORMAT)).append(TABLE_ROW_SEPARATOR)
+            .append(SECTION_HEADER_END);
+        return stringBuilder.toString();
     }
 }

@@ -11,14 +11,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LogRecordTest {
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
         DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
+    private static final String LOG =
+        "93.180.71.3 - - [17/May/2015:08:05:27 +0000] \"GET /downloads/product_1 HTTP/1.1\" 304 0 \"-\" \"Debian APT-HTTP/1.3 (0.8.16~exp12ubuntu10.22)\"";
+
 
     @Test
     void testThatLogParserParsesLogCorrectly() {
         LogRecord logRecord = new LogRecord();
-        String log =
-            "93.180.71.3 - - [17/May/2015:08:05:27 +0000] \"GET /downloads/product_1 HTTP/1.1\" 304 0 \"-\" \"Debian APT-HTTP/1.3 (0.8.16~exp12ubuntu10.22)\"";
 
-        logRecord.logParser(log);
+        //when
+        logRecord.logParser(LOG);
+
+        //then
         assertThat(logRecord.getRemoteAddr()).isEqualTo("93.180.71.3");
         assertThat(logRecord.getRequest()).isEqualTo("GET");
         assertThat(logRecord.getResource()).isEqualTo("/downloads/product_1");
@@ -33,9 +37,7 @@ public class LogRecordTest {
     void testThatLogParserReturnedExceptionForInvalidLogFormat() {
         LogRecord logRecord = new LogRecord();
         String invalidLog = "Invalid log entry";
-        assertThrows(IllegalArgumentException.class, () -> {
-            logRecord.logParser(invalidLog);
-        });
+        assertThrows(IllegalArgumentException.class, () -> logRecord.logParser(invalidLog));
     }
 
 }

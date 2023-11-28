@@ -23,48 +23,69 @@ import org.jetbrains.annotations.NotNull;
 public class LogReader {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
+    private static final String HTTPS_PATH = "https://";
+    private static final String HTTP_PATH = "http://";
+    private static final String SINGLE_STAR = "*";
+    private static final String DOUBLE_STAR = "**";
+    private static final String ERROR_MSG = "Files are empty";
+    private static final int SHIFT = 3;
 
-    @SuppressWarnings("MagicNumber")
+    private Stream<String> logLines;
+
     public Stream<LogRecord> readLogs(@NotNull String logPath, OffsetDateTime from, OffsetDateTime to) {
         try {
-            Stream<String> logLines = null;
-            if (logPath.startsWith("https://") || logPath.startsWith("http://")) {
+            if (logPath.startsWith(HTTPS_PATH) || logPath.startsWith(HTTP_PATH)) {
                 HttpResponse<String> response = sendHttpRequest(logPath);
                 logLines = Arrays.stream(response.body().split("\\r?\\n"));
             } else {
-                if (logPath.contains("**")) {
-                    int index = logPath.indexOf("**");
-                    File folder = new File(logPath.substring(0, index));
-                    String fileName = logPath.substring(index + 3);
-                    File[] files = listFilesForFolder(folder, fileName);
-                    logLines = Arrays.stream(files)
-                        .filter(File::isFile)
-                        .map(File::toPath)
-                        .flatMap(this::readLines);
-
-                } else if (logPath.contains("*")) {
-                    File folder = new File(logPath.replace("*", ""));
-                    File[] files = folder.listFiles();
-                    if (files != null) {
-                        logLines = Arrays.stream(files)
-                            .filter(File::isFile)
-                            .map(File::toPath)
-                            .flatMap(this::readLines);
-                    }
+                if (logPath.contains(DOUBLE_STAR)) {
+                    logLines = getLogLinesFromAllDirectories(logPath);
+                } else if (logPath.contains(SINGLE_STAR)) {
+                    logLines = getLogLinesFromCurrentDirectory(logPath);
                 } else {
                     Path logsPath = Paths.get(logPath);
-                    logLines = Files.lines(logsPath);
+                    try (Stream<String> lines = Files.lines(logsPath)) {
+                        logLines = lines;
+                    }
                 }
             }
 
-            return logLines.map(this::parseLogRecord)
-                .filter(log -> from == null || log.getTimestamp().isAfter(from))
-                .filter(log -> to == null || log.getTimestamp().isBefore(to));
+            if (logLines != null) {
+                return logLines.map(this::parseLogRecord)
+                    .filter(log -> from == null || log.getTimestamp().isAfter(from))
+                    .filter(log -> to == null || log.getTimestamp().isBefore(to));
+            } else {
+                throw new NullPointerException(ERROR_MSG);
+            }
 
         } catch (IOException | URISyntaxException | InterruptedException e) {
-            LOGGER.info(e);
+            LOGGER.error(e);
             return Stream.empty();
         }
+    }
+
+    private Stream<String> getLogLinesFromAllDirectories(String logPath) {
+        int index = logPath.indexOf(DOUBLE_STAR);
+        File folder = new File(logPath.substring(0, index));
+        String fileName = logPath.substring(index + SHIFT);
+        File[] files = listFilesForFolder(folder, fileName);
+        logLines = Arrays.stream(files)
+            .filter(File::isFile)
+            .map(File::toPath)
+            .flatMap(this::readLines);
+        return logLines;
+    }
+
+    private Stream<String> getLogLinesFromCurrentDirectory(String logPath) {
+        File folder = new File(logPath.replace(SINGLE_STAR, ""));
+        File[] files = folder.listFiles();
+        if (files != null) {
+            logLines = Arrays.stream(files)
+                .filter(File::isFile)
+                .map(File::toPath)
+                .flatMap(this::readLines);
+        }
+        return logLines;
     }
 
     private Stream<String> readLines(Path path) {
@@ -103,7 +124,6 @@ public class LogReader {
                 }
             }
         }
-        return fileList.toArray(new File[fileList.size()]);
+        return fileList.toArray(new File[0]);
     }
-
 }

@@ -1,38 +1,39 @@
 package edu.project3.logWorkers;
 
 public enum StatusResponse {
-    OK(200, "OK"),
-    CREATED(201, "Created"),
-    ACCEPTED(202, "Accepted"),
-    NO_CONTENT(204, "No Content"),
-    RESET_CONTENT(205, "Reset Content"),
-    PARTIAL_CONTENT(206, "Partial Content"),
+    OK(200),
+    CREATED(201),
+    ACCEPTED(202),
+    NO_CONTENT(204),
+    RESET_CONTENT(205),
+    PARTIAL_CONTENT(206),
 
-    MOVED_PERMANENTLY(301, "Moved Permanently"),
-    FOUND(302, "Found"),
-    SEE_OTHER(303, "See Other"),
-    NOT_MODIFIED(304, "Not Modified"),
-    TEMPORARY_REDIRECT(307, "Temporary Redirect"),
+    MOVED_PERMANENTLY(301),
+    FOUND(302),
+    SEE_OTHER(303),
+    NOT_MODIFIED(304),
+    TEMPORARY_REDIRECT(307),
 
-    BAD_REQUEST(400, "Bad Request"),
-    UNAUTHORIZED(401, "Unauthorized"),
-    FORBIDDEN(403, "Forbidden"),
-    NOT_FOUND(404, "Not Found"),
-    METHOD_NOT_ALLOWED(405, "Method Not Allowed"),
-    CONFLICT(409, "Conflict"),
-    GONE(410, "Gone"),
-    REQUESTED_RANGE_NOT_SATISFIABLE(416, "Range Not Satisfiable"),
+    BAD_REQUEST(400),
+    UNAUTHORIZED(401),
+    FORBIDDEN(403),
+    NOT_FOUND(404),
+    METHOD_NOT_ALLOWED(405),
+    CONFLICT(409),
+    GONE(410),
+    REQUESTED_RANGE_NOT_SATISFIABLE(416),
 
-    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
-    NOT_IMPLEMENTED(501, "Not Implemented"),
-    BAD_GATEWAY(502, "Bad Gateway"),
-    SERVICE_UNAVAILABLE(503, "Service Unavailable"),
-    GATEWAY_TIMEOUT(504, "Gateway Timeout"),
-    HTTP_VERSION_NOT_SUPPORTED(505, "HTTP Version Not Supported");
+    INTERNAL_SERVER_ERROR(500),
+    NOT_IMPLEMENTED(501),
+    BAD_GATEWAY(502),
+    SERVICE_UNAVAILABLE(503),
+    GATEWAY_TIMEOUT(504),
+    HTTP_VERSION_NOT_SUPPORTED(505);
 
     private final int value;
+    private static final String ERROR_MSG = "Invalid status code: %s";
 
-    StatusResponse(int value, String description) {
+    StatusResponse(int value) {
         this.value = value;
     }
 
@@ -42,6 +43,6 @@ public enum StatusResponse {
                 return status;
             }
         }
-        throw new IllegalArgumentException("Invalid status code: " + value);
+        throw new IllegalArgumentException(String.format(ERROR_MSG, value));
     }
 }

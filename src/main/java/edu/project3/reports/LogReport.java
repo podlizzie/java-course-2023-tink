@@ -11,9 +11,11 @@ import org.apache.logging.log4j.Logger;
 
 public class LogReport {
     private final static Logger LOGGER = LogManager.getLogger();
-    private final static String FOLDER_PATH = "src/main/java/edu/project3/tablesExamples";
+    private final static String FOLDER_PATH = "src/main/resources/tablesExamples";
     private static final String FORMAT_MD = "markdown";
     private static final String FORMAT_ADOC = "adoc";
+    private static final String ERROR_MSG = "Unsupported output format: %s";
+    private static final String ERROR_MSG2 = "Failed to write report to file: %s";
 
     private LogReport() {
 
@@ -52,7 +54,7 @@ public class LogReport {
                 + AdocGenerator.generateAddrTable(logRecords)
                 + AdocGenerator.generateRequestTable(logRecords);
         } else {
-            throw new IllegalArgumentException("Unsupported output format: " + outputFormat);
+            throw new IllegalArgumentException(String.format(ERROR_MSG, outputFormat));
         }
     }
 
@@ -70,7 +72,7 @@ public class LogReport {
         try {
             Files.write(file, report.getBytes());
         } catch (Exception e) {
-            LOGGER.error("Failed to write report to file: " + fileName, e);
+            LOGGER.error(String.format(ERROR_MSG2, fileName), e);
         }
     }
 
