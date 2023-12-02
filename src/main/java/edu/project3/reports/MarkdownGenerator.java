@@ -4,7 +4,7 @@ import edu.project3.logWorkers.LogRecord;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class MarkdownGenerator {
+public class MarkdownGenerator extends LogReportGenerator {
     private static final String FORMAT = "markdown";
     private static final String SECTION_HEADER_START = "#### ";
     private static final String SECTION_TABLE = "|:---------------------:|-------------:|\n";
@@ -13,11 +13,8 @@ public class MarkdownGenerator {
     private static final String TABLE_COLUMN_SEPARATOR = "|";
     private static final String COUNT_ROW = "Count";
 
-    private MarkdownGenerator() {
-
-    }
-
-    public static String generateGeneralInformation(
+    @Override
+    public String generateGeneralInformation(
         String logPath,
         OffsetDateTime from,
         OffsetDateTime to,
@@ -44,7 +41,8 @@ public class MarkdownGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generateResourceTable(List<LogRecord> logRecords) {
+    @Override
+    public String generateResourceTable(List<LogRecord> logRecords) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SECTION_HEADER_START).append("Resource Table\n\n")
@@ -55,7 +53,8 @@ public class MarkdownGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generateStatusCodesTable(List<LogRecord> logRecords) {
+    @Override
+    public String generateStatusCodesTable(List<LogRecord> logRecords) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SECTION_HEADER_START).append("Status Codes Table\n\n")
@@ -67,7 +66,8 @@ public class MarkdownGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generateAddrTable(List<LogRecord> logRecords) {
+    @Override
+    public String generateAddrTable(List<LogRecord> logRecords) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SECTION_HEADER_START).append("IP Address Table\n\n")
@@ -78,7 +78,8 @@ public class MarkdownGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generateRequestTable(List<LogRecord> logRecords) {
+    @Override
+    public String generateRequestTable(List<LogRecord> logRecords) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SECTION_HEADER_START).append("Requests Table\n\n")

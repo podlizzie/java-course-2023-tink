@@ -10,10 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AdocGeneratorTest {
     private static final List<LogRecord> sampleLogRecords = createSampleLogRecords();
+    private static final AdocGenerator adocGenerator = new AdocGenerator();
 
     @Test
     void testThatGenerateGeneralInformationReturnedCorrectValue() {
-        String generalInformation = AdocGenerator.generateGeneralInformation("logPath", null, null, 100, "1234");
+        String generalInformation = adocGenerator.generateGeneralInformation("logPath", null, null, 100, "1234");
         assertThat(generalInformation).isEqualTo("""
             ==== General Information
             |===
@@ -30,7 +31,7 @@ public class AdocGeneratorTest {
 
     @Test
     void testThatGenerateResourceTableReturnedCorrectTable() {
-        String resourceTable = AdocGenerator.generateResourceTable(sampleLogRecords);
+        String resourceTable = adocGenerator.generateResourceTable(sampleLogRecords);
         assertThat(resourceTable).isEqualTo("""
             ==== Resource Table
             |===
@@ -43,7 +44,7 @@ public class AdocGeneratorTest {
 
     @Test
     void testThatGenerateStatusCodesTableReturnedCorrectTable() {
-        String statusCodesTable = AdocGenerator.generateStatusCodesTable(sampleLogRecords);
+        String statusCodesTable = adocGenerator.generateStatusCodesTable(sampleLogRecords);
         assertThat(statusCodesTable).isEqualTo("""
             ==== Status Codes Table
             |===
@@ -57,7 +58,7 @@ public class AdocGeneratorTest {
 
     @Test
     void testThatGenerateAddrTableReturnedCorrectTable() {
-        String addrTable = AdocGenerator.generateAddrTable(sampleLogRecords);
+        String addrTable = adocGenerator.generateAddrTable(sampleLogRecords);
         assertThat(addrTable).isEqualTo("""
             ==== IP Address Table
             |===
@@ -71,7 +72,7 @@ public class AdocGeneratorTest {
 
     @Test
     void testThatGenerateRequestTableReturnedCorrectTable() {
-        String requestTable = AdocGenerator.generateRequestTable(sampleLogRecords);
+        String requestTable = adocGenerator.generateRequestTable(sampleLogRecords);
         assertThat(requestTable).isEqualTo("""
             ==== Requests Table
             |===

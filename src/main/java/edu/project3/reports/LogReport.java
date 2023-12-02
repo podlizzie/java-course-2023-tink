@@ -16,46 +16,63 @@ public class LogReport {
     private static final String FORMAT_ADOC = "adoc";
     private static final String ERROR_MSG = "Unsupported output format: %s";
     private static final String ERROR_MSG2 = "Failed to write report to file: %s";
+    private final MarkdownGenerator markdownGenerator = new MarkdownGenerator();
+    private final AdocGenerator adocGenerator = new AdocGenerator();
 
-    private LogReport() {
-
-    }
-
-    public static void generateReportAndWriteToFile(
+    public void generateReportAndWriteToFile(
         List<LogRecord> logRecords,
         String logPath,
         OffsetDateTime from,
         OffsetDateTime to,
         String outputFormat
     ) {
-        String report = generateReport(logRecords, logPath, from, to, outputFormat);
+        String report = generateReport(logRecords, outputFormat, logPath, from, to);
         writeReportToFile(report, outputFormat);
     }
 
-    private static String generateReport(
+    private String generateReport(
+        List<LogRecord> logRecords,
+        String outputFormat,
+        String logPath,
+        OffsetDateTime from,
+        OffsetDateTime to
+    ) {
+        String averageResponseSize = LogReportUtils.computeAverageResponseSize(logRecords);
+        if (outputFormat.equals(FORMAT_MD)) {
+            return generateMarkdown(logRecords, logPath, from, to, averageResponseSize);
+        } else if (outputFormat.equals(FORMAT_ADOC)) {
+            return generateAdoc(logRecords, logPath, from, to, averageResponseSize);
+        } else {
+            throw new IllegalArgumentException(String.format(ERROR_MSG, outputFormat));
+        }
+    }
+
+    private String generateAdoc(
         List<LogRecord> logRecords,
         String logPath,
         OffsetDateTime from,
         OffsetDateTime to,
-        String outputFormat
+        String averageResponseSize
     ) {
-        String averageResponseSuze = LogReportUtils.computeAverageResponseSize(logRecords);
-        if (outputFormat.equals(FORMAT_MD)) {
-            return
-                MarkdownGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSuze)
-                    + MarkdownGenerator.generateResourceTable(logRecords)
-                    + MarkdownGenerator.generateStatusCodesTable(logRecords)
-                    + MarkdownGenerator.generateAddrTable(logRecords)
-                    + MarkdownGenerator.generateRequestTable(logRecords);
-        } else if (outputFormat.equals(FORMAT_ADOC)) {
-            return AdocGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSuze)
-                + AdocGenerator.generateResourceTable(logRecords)
-                + AdocGenerator.generateStatusCodesTable(logRecords)
-                + AdocGenerator.generateAddrTable(logRecords)
-                + AdocGenerator.generateRequestTable(logRecords);
-        } else {
-            throw new IllegalArgumentException(String.format(ERROR_MSG, outputFormat));
-        }
+        return adocGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSize)
+            + adocGenerator.generateResourceTable(logRecords)
+            + adocGenerator.generateStatusCodesTable(logRecords)
+            + adocGenerator.generateAddrTable(logRecords)
+            + adocGenerator.generateRequestTable(logRecords);
+    }
+
+    private String generateMarkdown(
+        List<LogRecord> logRecords,
+        String logPath,
+        OffsetDateTime from,
+        OffsetDateTime to,
+        String averageResponseSize
+    ) {
+        return markdownGenerator.generateGeneralInformation(logPath, from, to, logRecords.size(), averageResponseSize)
+            + markdownGenerator.generateResourceTable(logRecords)
+            + markdownGenerator.generateStatusCodesTable(logRecords)
+            + markdownGenerator.generateAddrTable(logRecords)
+            + markdownGenerator.generateRequestTable(logRecords);
     }
 
     public static void writeReportToFile(String report, String outputFormat) {

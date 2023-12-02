@@ -4,7 +4,7 @@ import edu.project3.logWorkers.LogRecord;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class AdocGenerator {
+public class AdocGenerator extends LogReportGenerator {
     private static final String FORMAT = "adoc";
     private static final String SECTION_HEADER_START = "==== ";
     private static final String SECTION_HEADER_END = "\n|===\n";
@@ -12,11 +12,8 @@ public class AdocGenerator {
     private static final String TABLE_COLUMN_SEPARATOR = "|";
     private static final String COUNT_ROW = "Count";
 
-    private AdocGenerator() {
-
-    }
-
-    public static String generateGeneralInformation(
+    @Override
+    public String generateGeneralInformation(
         String logPath,
         OffsetDateTime from,
         OffsetDateTime to,
@@ -45,7 +42,8 @@ public class AdocGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generateResourceTable(List<LogRecord> logRecords) {
+    @Override
+    public String generateResourceTable(List<LogRecord> logRecords) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SECTION_HEADER_START).append("Resource Table")
@@ -57,7 +55,8 @@ public class AdocGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generateStatusCodesTable(List<LogRecord> logRecords) {
+    @Override
+    public String generateStatusCodesTable(List<LogRecord> logRecords) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SECTION_HEADER_START).append("Status Codes Table")
@@ -70,7 +69,8 @@ public class AdocGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generateAddrTable(List<LogRecord> logRecords) {
+    @Override
+    public String generateAddrTable(List<LogRecord> logRecords) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SECTION_HEADER_START).append("IP Address Table")
@@ -82,7 +82,8 @@ public class AdocGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generateRequestTable(List<LogRecord> logRecords) {
+    @Override
+    public String generateRequestTable(List<LogRecord> logRecords) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SECTION_HEADER_START).append("Requests Table")

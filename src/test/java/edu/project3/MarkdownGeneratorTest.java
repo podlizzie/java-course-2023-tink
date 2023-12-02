@@ -10,10 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MarkdownGeneratorTest {
     private static final List<LogRecord> sampleLogRecords = createSampleLogRecords();
+    private static final MarkdownGenerator markdownGenerator = new MarkdownGenerator();
 
     @Test
     void testThatGenerateGeneralInformationReturnedCorrectValue() {
-        String generalInformation = MarkdownGenerator.generateGeneralInformation("logPath", null, null, 100, "1234");
+        String generalInformation = markdownGenerator.generateGeneralInformation("logPath", null, null, 100, "1234");
         assertThat(generalInformation).isEqualTo("""
             #### General Information
 
@@ -30,7 +31,7 @@ public class MarkdownGeneratorTest {
 
     @Test
     void testThatGenerateResourceTableReturnedCorrectTable() {
-        String resourceTable = MarkdownGenerator.generateResourceTable(sampleLogRecords);
+        String resourceTable = markdownGenerator.generateResourceTable(sampleLogRecords);
         assertThat(resourceTable).isEqualTo("""
             #### Resource Table
 
@@ -43,7 +44,7 @@ public class MarkdownGeneratorTest {
 
     @Test
     void testThatGenerateStatusCodesTableReturnedCorrectTable() {
-        String statusCodesTable = MarkdownGenerator.generateStatusCodesTable(sampleLogRecords);
+        String statusCodesTable = markdownGenerator.generateStatusCodesTable(sampleLogRecords);
         assertThat(statusCodesTable).isEqualTo("""
             #### Status Codes Table
 
@@ -57,7 +58,7 @@ public class MarkdownGeneratorTest {
 
     @Test
     void testThatGenerateAddrTableReturnedCorrectTable() {
-        String addrTable = MarkdownGenerator.generateAddrTable(sampleLogRecords);
+        String addrTable = markdownGenerator.generateAddrTable(sampleLogRecords);
         assertThat(addrTable).isEqualTo("""
             #### IP Address Table
 
@@ -71,7 +72,7 @@ public class MarkdownGeneratorTest {
 
     @Test
     void testThatGenerateRequestTableReturnedCorrectTable() {
-        String requestTable = MarkdownGenerator.generateRequestTable(sampleLogRecords);
+        String requestTable = markdownGenerator.generateRequestTable(sampleLogRecords);
         assertThat(requestTable).isEqualTo("""
             #### Requests Table
 
