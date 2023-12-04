@@ -23,6 +23,8 @@ public class Server {
 
     private static final int MAX_CONNECTIONS = 5;
     private static final String QUOTES_NOT_FOUND = "Цитата не найдена.";
+    private static final String SERVER_RUN = "Server is running";
+    private static final String CLIENT_CONNECT = "Сlient connected";
     private static final Map<String, String> QUOTES = new HashMap<>();
 
     static {
@@ -49,10 +51,10 @@ public class Server {
         ExecutorService executor = Executors.newFixedThreadPool(MAX_CONNECTIONS);
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            LOGGER.info("Server is running\n");
+            LOGGER.info(SERVER_RUN);
             while (true) {
                 Socket connectionSocket = serverSocket.accept();
-                LOGGER.info("Сlient connected");
+                LOGGER.info(CLIENT_CONNECT);
                 executor.submit(() -> {
                     try {
                         handleClient(connectionSocket);
@@ -72,13 +74,15 @@ public class Server {
             PrintWriter outToClient = new PrintWriter(connectionSocket.getOutputStream(), true);
 
             String word = inFromClient.readLine();
-            String quote = QUOTES.getOrDefault(word.toLowerCase(), QUOTES_NOT_FOUND);
+            String quote = getQuoteForKeyword(word);
 
             outToClient.println(quote);
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
-        } finally {
-            connectionSocket.close();
         }
+    }
+
+    public static String getQuoteForKeyword(String word) {
+        return QUOTES.getOrDefault(word.toLowerCase(), QUOTES_NOT_FOUND);
     }
 }
