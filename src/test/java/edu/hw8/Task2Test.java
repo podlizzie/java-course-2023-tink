@@ -2,15 +2,17 @@ package edu.hw8;
 
 import edu.hw8.task2.CalculatorFibonacci;
 import edu.hw8.task2.FixedThreadPool;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task2Test {
 
     private final static Logger LOGGER = LogManager.getLogger();
-    private static final int THREAD_POOL_SIZE = 5;
+    private static final int THREAD_POOL_SIZE = 4;
     private static final int MAX_N = 40;
 
     @Test
@@ -39,5 +41,24 @@ public class Task2Test {
 
         //then
         assertTrue(threadPoolEndTime - threadPoolStartTime < singleThreadEndTime - singleThreadStartTime);
+    }
+
+    @Test
+    void testThatThreadPoolExecutesAllTasks() {
+        // given
+        int numberOfThreads = 10;
+        AtomicInteger countOfExecutedTasks = new AtomicInteger(0);
+        int numberOfTasks = 15;
+
+        // when
+        try (FixedThreadPool pool = new FixedThreadPool(numberOfThreads)) {
+            for (int i = 0; i < numberOfTasks; i++) {
+                pool.execute(countOfExecutedTasks::incrementAndGet);
+            }
+            pool.start();
+        }
+
+        // then
+        assertEquals(numberOfTasks, countOfExecutedTasks.get());
     }
 }
