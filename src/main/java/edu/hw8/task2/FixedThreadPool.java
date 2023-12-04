@@ -12,7 +12,6 @@ public class FixedThreadPool implements ThreadPool {
     public FixedThreadPool(int nThreads) {
         for (int i = 0; i < nThreads; i++) {
             workers.add(new Worker());
-            workers.getLast().start();
         }
     }
 
