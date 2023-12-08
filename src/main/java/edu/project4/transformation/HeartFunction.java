@@ -1,6 +1,6 @@
 package edu.project4.transformation;
 
-import edu.project4.Point;
+import edu.project4.entity.Point;
 
 public class HeartFunction implements Transformation{
     @Override
