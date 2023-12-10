@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,26 +24,16 @@ public class Server {
     private static final String QUOTES_NOT_FOUND = "Цитата не найдена.";
     private static final String SERVER_RUN = "Server is running";
     private static final String CLIENT_CONNECT = "Сlient connected";
-    private static final Map<String, String> QUOTES = new HashMap<>();
-
-    static {
-        QUOTES.put(
-            "личности",
-            "Не переходи на личности там, где их нет."
-        );
-        QUOTES.put(
-            "оскорбления",
-            "Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами."
-        );
-        QUOTES.put(
-            "глупый",
-            "А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма."
-        );
-        QUOTES.put(
-            "интеллект",
-            "Чем ниже интеллект, тем громче оскорбления."
-        );
-    }
+    private static final Map<String, String> QUOTES = Map.of(
+        "личности",
+        "Не переходи на личности там, где их нет.",
+        "оскорбления",
+        "Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами.",
+        "глупый",
+        "А я тебе говорил, что ты глупый? Так вот, я забираю свои слова обратно... Ты просто бог идиотизма.",
+        "интеллект",
+        "Чем ниже интеллект, тем громче оскорбления."
+    );
 
     @SuppressWarnings("UncommentedMain")
     public static void main(String[] args) throws IOException {

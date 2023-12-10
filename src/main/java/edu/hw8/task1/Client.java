@@ -22,14 +22,13 @@ public class Client {
 
     @SuppressWarnings("UncommentedMain")
     public static void main(String[] args) {
-
         try (Socket socket = new Socket(SERVER, PORT)) {
-
             PrintWriter outToServer = new PrintWriter(socket.getOutputStream(), true);
-
             String keyWord = getUserWord();
             outToServer.println(keyWord);
-            LOGGER.info(String.format(OUTPUT_PHRASE, getAnswerFromServer(socket)));
+
+            var answer = getAnswerFromServer(socket);
+            LOGGER.info(String.format(OUTPUT_PHRASE, answer));
         } catch (ConnectException e) {
             LOGGER.error("Connection refused. Please ensure the server is running.");
         } catch (IOException e) {
