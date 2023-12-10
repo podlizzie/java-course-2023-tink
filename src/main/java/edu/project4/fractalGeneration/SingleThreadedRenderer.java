@@ -1,10 +1,13 @@
 package edu.project4.fractalGeneration;
 
+import edu.project4.entity.Pixel;
 import edu.project4.entity.PixelList;
 import edu.project4.entity.Point;
 import edu.project4.transformation.AffineGenerator;
 import edu.project4.transformation.Transformation;
+import java.awt.Color;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class SingleThreadedRenderer extends RendererUtils {
 
@@ -35,6 +38,16 @@ public class SingleThreadedRenderer extends RendererUtils {
                 }
             }
         }
+    }
+
+    protected void coloredPixel(Point point, @NotNull PixelList pixelList, Color transformationColor) {
+        Pixel pixel = pixelList.getPixel(point);
+        if (pixel.getHits() == 0) {
+            pixel.setColor(transformationColor);
+        } else {
+            pixel.mixColor(transformationColor);
+        }
+        pixel.incrementHits();
     }
 }
 
