@@ -18,19 +18,17 @@ public class GammaCorrectionTest {
     @DisplayName("Gamma correction should recolored pixels")
     void testThatGammaCorrectionRecoloredPixels() {
         //given
-        PixelList canvas = new PixelList(HEIGHT, WIDTH, false, false);
+        PixelList pixelList = new PixelList(HEIGHT, WIDTH, false, false);
         Point p1 = new Point(0, 0);
-        Point p2 = new Point(0, 1);
-        Color defaultColor = canvas.getPixel(p1).getColor();
 
         //when
-        canvas.getPixel(p1).setHits(100);
-        canvas.getPixel(p2).setHits(50);
-        canvas.getPixel(p2).setColor(new Color(100, 100, 100));
-        correction.applyGammaCorrection(canvas);
-        Color dot2Color = canvas.getPixel(p2).getColor();
+        pixelList.getPixel(p1).setHits(3);
+        pixelList.getPixel(p1).setColor(new Color(173, 128, 128));
+        Color pixelStartColor = pixelList.getPixel(p1).getColor();
+        correction.applyGammaCorrection(pixelList);
+        Color pixelEndColor = pixelList.getPixel(p1).getColor();
 
         //then
-        assertThat(dot2Color).isNotEqualTo(defaultColor);
+        assertThat(pixelEndColor).isNotEqualTo(pixelStartColor);
     }
 }
