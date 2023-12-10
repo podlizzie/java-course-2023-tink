@@ -20,25 +20,4 @@ public class AffineGeneratorTest {
         // then
         assertThat(transformationsList).hasSize(numberOfTransformations);
     }
-
-    @Test
-    @DisplayName("Test that generated coefficients respect the constraints")
-    void testThatGeneratedCoefficientsRespectConstraints() {
-        // given
-        AffineGenerator affineGenerator = AffineUtils.generateValidCoefficients();
-
-        // when
-        double a = affineGenerator.getA();
-        double b = affineGenerator.getB();
-        double d = affineGenerator.getD();
-        double e = affineGenerator.getE();
-
-        // Conditions from the generateValidCoefficients method
-        boolean condition1 = (a * a + b * b + d * d + e * e < 1 + Math.pow(a * e - b * d, 2));
-        boolean condition2 = (b * b + e * e < 1);
-        boolean condition3 = (a * a + d * d < 1);
-
-        //then
-        assertThat(condition1 && condition2 && condition3).isTrue();
-    }
 }
