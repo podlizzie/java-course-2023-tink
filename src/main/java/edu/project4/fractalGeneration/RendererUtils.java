@@ -15,6 +15,8 @@ public abstract class RendererUtils {
     protected static final double X_MAX = 1.83;
     protected static final double Y_MIN = -1;
     protected static final double Y_MAX = 1;
+    protected final static int PRE_STEPS = -20;
+
 
     protected abstract void render(
         PixelList pixelList,
