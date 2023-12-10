@@ -34,4 +34,21 @@ public class AffineGenerator implements Transformation {
     public Color getColor() {
         return color;
     }
+
+    public double getA() {
+        return a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public double getD() {
+        return d;
+    }
+
+    public double getE() {
+        return e;
+    }
+
 }

@@ -22,7 +22,7 @@ public class AffineUtils {
         return transformations;
     }
 
-    private static AffineGenerator generateValidCoefficients() {
+    public static AffineGenerator generateValidCoefficients() {
         double a;
         double b;
         double c;
