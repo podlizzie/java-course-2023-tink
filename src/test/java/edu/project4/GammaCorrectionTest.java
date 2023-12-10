@@ -1,4 +1,4 @@
-package edu.project3;
+package edu.project4;
 
 import edu.project4.entity.PixelList;
 import edu.project4.fractalGeneration.SingleThreadedRenderer;

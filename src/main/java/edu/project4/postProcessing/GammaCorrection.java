@@ -5,8 +5,7 @@ import edu.project4.entity.PixelList;
 import java.awt.Color;
 
 public class GammaCorrection implements PostProcessing {
-    private static final double GAMMA = 2.2;
-    private static final double MAX_COLOR = 255.0;
+    private static final double GAMMA = 2;
 
     @Override
     public void applyGammaCorrection(PixelList pixelList) {
