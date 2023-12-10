@@ -41,8 +41,8 @@ public class DFSGenerationMultiThreaded implements Generator {
         stack.push(current);
 
         while (!stack.isEmpty()) {
-            current = stack.peek();
-            List<Coordinate> neighbors = GenerationUtils.getNeighbors(current, grid);
+            Coordinate current2 = stack.peek();
+            List<Coordinate> neighbors = GenerationUtils.getNeighbors(current2, grid);
             if (!neighbors.isEmpty()) {
                 Coordinate next = neighbors.get(random.nextInt(neighbors.size()));
                 removeWall(current, next, grid);
