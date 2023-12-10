@@ -2,7 +2,7 @@ package edu.project4.transformation;
 
 import edu.project4.entity.Point;
 
-public class HeartFunction implements Transformation{
+public class HeartFunction implements Transformation {
     @Override
     public Point apply(Point point) {
         double x = point.x();

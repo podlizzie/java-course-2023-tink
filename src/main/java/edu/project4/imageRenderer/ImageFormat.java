@@ -6,13 +6,13 @@ public enum ImageFormat {
     JPEG("jpeg"),
     JPG("jpg");
 
-    private final String stringRepresentation;
+    private final String stringImgFormat;
 
-    ImageFormat(String stringRepresentation) {
-        this.stringRepresentation = stringRepresentation;
+    ImageFormat(String stringImgFormat) {
+        this.stringImgFormat = stringImgFormat;
     }
 
     @Override public String toString() {
-        return stringRepresentation;
+        return stringImgFormat;
     }
 }

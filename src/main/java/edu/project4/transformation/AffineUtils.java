@@ -23,7 +23,12 @@ public class AffineUtils {
     }
 
     private static AffineGenerator generateValidCoefficients() {
-        double a, b, c, d, e, f;
+        double a;
+        double b;
+        double c;
+        double d;
+        double e;
+        double f;
         do {
             a = generateValidCoefficient();
             d = generateValidCoefficient();
@@ -31,8 +36,8 @@ public class AffineUtils {
             e = generateValidCoefficient();
             c = generateValidCoefficient();
             f = generateValidCoefficient();
-        } while ((a * a + b * b + d * d + e * e >= 1 + Math.pow(a * e - b * d, 2)) && (b * b + e * e >= 1) &&
-            (a * a + d * d >= 1));
+        } while ((a * a + b * b + d * d + e * e >= 1 + Math.pow(a * e - b * d, 2)) && (b * b + e * e >= 1)
+            && (a * a + d * d >= 1));
 
         int red = ThreadLocalRandom.current().nextInt(0, MAX_COLOR + 1);
         int green = ThreadLocalRandom.current().nextInt(0, MAX_COLOR + 1);

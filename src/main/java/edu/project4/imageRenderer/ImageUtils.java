@@ -1,8 +1,6 @@
 package edu.project4.imageRenderer;
 
-import edu.project4.entity.Canvas;
-import edu.project4.fractalGeneration.FractalImage;
-import java.awt.Color;
+import edu.project4.entity.PixelList;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,45 +13,45 @@ public class ImageUtils {
     }
 
     public static void renderImage(
-        FractalImage fractalImage,
+        PixelList pixelList,
         Path directoryPath,
         String fileName,
         ImageFormat fileFormat
     ) {
         if (!Files.isDirectory(directoryPath)) {
-            throw new IllegalArgumentException("directoryPath should be a path of some directory");
+            throw new IllegalArgumentException("Directory path should be a path of some directory");
         }
-        int height = fractalImage.height();
-        int width = fractalImage.width();
+        int height = pixelList.getHeight();
+        int width = pixelList.getWidth();
 
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(height, width, BufferedImage.TYPE_INT_RGB);
         Graphics graphics = image.getGraphics();
-        fillGraphics(fractalImage, graphics);
+        fillGraphics(pixelList, graphics);
 
-        saveFile(image, directoryPath, fileName, fileFormat);
+        saveToFile(image, directoryPath, fileName, fileFormat);
     }
 
-    private static void fillGraphics(FractalImage fractalImage, Graphics graphics) {
-        for (int i = 0; i < fractalImage.width(); i++) {
-            for (int j = 0; j < fractalImage.height(); j++) {
-                var pixel = fractalImage.pixel(i, j);
-                graphics.setColor(new Color(pixel.getR(), pixel.getG(), pixel.getB()));
+    private static void fillGraphics(PixelList pixelList, Graphics graphics) {
+        for (int i = 0; i < pixelList.getHeight(); i++) {
+            for (int j = 0; j < pixelList.getWidth(); j++) {
+                var pixel = pixelList.getPixel(i, j);
+                graphics.setColor(pixel.getColor());
                 graphics.fillRect(i, j, 1, 1);
             }
         }
     }
 
 
-    private static void saveFile(BufferedImage image, Path directoryPath, String fileName, ImageFormat fileFormat) {
-        String fullFileName = directoryPath + "\\" + fileName + "." + fileFormat;
+    private static void saveToFile(BufferedImage image, Path directoryPath, String fileName, ImageFormat imageFormat) {
+        String fullFileName = directoryPath + "/" + fileName + "." + imageFormat;
         int i = 0;
         while (Files.exists(Path.of(fullFileName))) {
             i++;
-            fullFileName = directoryPath + "\\" + fileName + i + "." + fileFormat;
+            fullFileName = directoryPath + "/" + fileName + i + "." + imageFormat;
         }
 
         try {
-            ImageIO.write(image, fileFormat.toString(), new File(fullFileName));
+            ImageIO.write(image, imageFormat.toString(), new File(fullFileName));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

@@ -9,9 +9,6 @@ public class SphericalFunction implements Transformation {
         double x = oldPoint.x();
         double y = oldPoint.y();
 
-        double newX = x / (x * x + y * y);
-        double newY = y / (x * x + y * y);
-
-        return new Point(newX, newY);
+        return new Point(x / (x * x + y * y), y / (x * x + y * y));
     }
 }
