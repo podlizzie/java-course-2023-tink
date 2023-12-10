@@ -12,11 +12,12 @@ public class StatsCollector {
 
     public void push(String metricName, double[] values) {
         metricsMap.compute(metricName, (key, list) -> {
-            if (list == null) {
-                list = new ArrayList<>();
+            List<Double> newList = list;
+            if (newList == null) {
+                newList = new ArrayList<>();
             }
-            Arrays.stream(values).forEach(list::add);
-            return list;
+            Arrays.stream(values).forEach(newList::add);
+            return newList;
         });
     }
 
