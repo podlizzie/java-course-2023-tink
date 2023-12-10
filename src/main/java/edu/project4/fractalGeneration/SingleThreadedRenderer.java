@@ -7,7 +7,6 @@ import edu.project4.transformation.Transformation;
 import java.util.List;
 
 public class SingleThreadedRenderer extends RendererUtils {
-    private final static int PRE_STEPS = -20;
 
     @Override
     public void render(
