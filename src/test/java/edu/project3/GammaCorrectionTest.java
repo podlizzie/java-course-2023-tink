@@ -1,16 +1,19 @@
 package edu.project3;
 
 import edu.project4.entity.PixelList;
-import edu.project4.entity.Point;
+import edu.project4.fractalGeneration.SingleThreadedRenderer;
 import edu.project4.postProcessing.GammaCorrection;
+import edu.project4.transformation.AffineUtils;
+import edu.project4.transformation.DiskFunction;
+import java.awt.Color;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.awt.Color;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class GammaCorrectionTest {
-    private static final int WIDTH = 2;
-    private static final int HEIGHT = 2;
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 500;
 
     private final GammaCorrection correction = new GammaCorrection();
 
@@ -19,14 +22,20 @@ public class GammaCorrectionTest {
     void testThatGammaCorrectionRecoloredPixels() {
         //given
         PixelList pixelList = new PixelList(HEIGHT, WIDTH, false, false);
-        Point p1 = new Point(0, 0);
+        SingleThreadedRenderer singleThreadedRenderer = new SingleThreadedRenderer();
+        singleThreadedRenderer.render(
+            pixelList,
+            500,
+            1000,
+            AffineUtils.getListOfAffineTransformations(20),
+            List.of(new DiskFunction())
+        );
 
         //when
-        pixelList.getPixel(p1).setHits(3);
-        pixelList.getPixel(p1).setColor(new Color(173, 128, 128));
-        Color pixelStartColor = pixelList.getPixel(p1).getColor();
-        correction.applyGammaCorrection(pixelList);
-        Color pixelEndColor = pixelList.getPixel(p1).getColor();
+        Color pixelStartColor = pixelList.getPixel(340, 340).getColor();
+        GammaCorrection gammaCorrection = new GammaCorrection();
+        gammaCorrection.applyGammaCorrection(pixelList);
+        Color pixelEndColor = pixelList.getPixel(340, 340).getColor();
 
         //then
         assertThat(pixelEndColor).isNotEqualTo(pixelStartColor);
