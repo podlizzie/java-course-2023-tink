@@ -1,4 +1,4 @@
-package edu.hw10.task2;
+package edu.hw10.task2.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
