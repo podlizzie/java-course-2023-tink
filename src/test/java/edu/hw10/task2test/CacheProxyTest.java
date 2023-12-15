@@ -33,7 +33,7 @@ class CacheProxyTest {
     }
 
     @Test
-    public void testThatCachingWorksRight() {
+    public void testThatCachingWorksCorrectly() {
         //given
         //when
         int expectedNum = 233;
@@ -51,10 +51,11 @@ class CacheProxyTest {
     }
 
     @Test
-    public void assertThatPersistWorksRight() throws IOException {
+    public void testThatPersistWorksCorrectly() throws IOException {
         //given
         cachingCalculator.fib(0);
         cachingCalculator.fib(1);
+        cachingCalculator.fib(2);
         cachingCalculator.fib(2);
 
         //when
