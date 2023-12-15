@@ -1,4 +1,4 @@
-package edu.hw11;
+package edu.hw11.task2;
 
 public class Calculator {
     public Calculator() {

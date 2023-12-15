@@ -1,10 +1,10 @@
-package edu.hw11;
+package edu.hw11.task2;
 
 import net.bytebuddy.implementation.bind.annotation.Argument;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 
 public class CalculatorInterceptor {
-    public CalculatorInterceptor() {
+    private CalculatorInterceptor() {
 
     }
 
