@@ -3,7 +3,6 @@ package edu.hw10.task1;
 import edu.hw10.task1.annotations.Max;
 import edu.hw10.task1.annotations.Min;
 import edu.hw10.task1.annotations.NotNull;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -20,42 +19,46 @@ public class RandomObjectGenerator {
     }
 
     public <T> T nextObject(Class<T> objectClass, String fabricMethodName)
-        throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        T instance;
-
+        throws Exception {
         if (objectClass.isRecord()) {
-            Class<?>[] fieldTypes =
-                Arrays.stream(objectClass.getRecordComponents())
-                    .map(RecordComponent::getType)
-                    .toArray(Class<?>[]::new);
-
-            Object[] parameters = Arrays.stream(objectClass.getDeclaredFields())
-                .map(RandomObjectGenerator::getValue)
-                .toArray();
-
-            Constructor<T> constructor = objectClass.getDeclaredConstructor(fieldTypes);
-            constructor.setAccessible(true);
-            instance = constructor.newInstance(parameters);
+            return createRecordInstance(objectClass);
         } else {
-            Constructor<T> constructor = objectClass.getDeclaredConstructor();
-            constructor.setAccessible(true);
+            T instance = createInstance(objectClass, fabricMethodName);
+            populateFields(instance);
+            return instance;
+        }
+    }
 
-            if (fabricMethodName != null && !fabricMethodName.isEmpty()) {
-                instance = (T) objectClass.getDeclaredMethod(fabricMethodName).invoke(null);
-            } else {
-                instance = constructor.newInstance();
-            }
+    private <T> T createRecordInstance(Class<T> recordClass) throws Exception {
+        Class<?>[] fieldTypes = Arrays.stream(recordClass.getRecordComponents())
+            .map(RecordComponent::getType)
+            .toArray(Class<?>[]::new);
+        Object[] parameters = Arrays.stream(recordClass.getDeclaredFields())
+            .map(RandomObjectGenerator::getValue)
+            .toArray();
+        Constructor<T> constructor = recordClass.getDeclaredConstructor(fieldTypes);
+        return constructor.newInstance(parameters);
+    }
 
-            for (Field field : objectClass.getDeclaredFields()) {
-                if (field.isAnnotationPresent(Min.class) || field.isAnnotationPresent(Max.class)
-                    || field.isAnnotationPresent(NotNull.class)) {
-                    field.setAccessible(true);
-                    field.set(instance, getValue(field));
-                }
+    private <T> T createInstance(Class<T> objectClass, String fabricMethodName)
+        throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Constructor<T> constructor = objectClass.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        if (fabricMethodName != null && !fabricMethodName.isEmpty()) {
+            return (T) objectClass.getDeclaredMethod(fabricMethodName).invoke(null);
+        } else {
+            return constructor.newInstance();
+        }
+    }
+
+    private <T> void populateFields(T instance) throws IllegalAccessException {
+        Field[] fields = instance.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            if (field.getAnnotations() != null) {
+                field.setAccessible(true);
+                field.set(instance, getValue(field));
             }
         }
-
-        return instance;
     }
 
     private static Object getValue(Field field) {
